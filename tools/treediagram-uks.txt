@@ -1,0 +1,106 @@
+aplikasisuksdigital/
+│
+├── index.php                 # halaman homepage selamat datang (Memuat file dari views/landing/home.php + pakai navbar yang ada menu loginuser)
+│
+├── assets/                   # Menyimpan file-file pendukung tampilan (Statis)
+│   ├── js/
+│   ├── css/
+│   ├── plugins/
+│   └── images/
+│       ├── slider/
+│       ├── barang/
+│       ├── siswa/
+│       ├── guru/
+│       └── user/
+│  
+├── views/
+│   │
+│   ├── component/ 
+│   │   ├── tamu/             # Komponen untuk pengunjung umum / pasien tanpa login 
+│   │   │   ├── navbar.php    =>  Menu atas halaman depan (Ada tombol login pengurus UKS)
+│   │   │   └── footer.php
+│   │   ├── user/             # Komponen untuk Pengurus UKS setelah berhasil login
+│   │       ├── navbar.php    =>  Menu atas internal (Ada foto profil, nama user, role, & tombol logout)
+│   │       ├── sidebaradmin.php    => Sidebar khusus Admin (Bisa klik & akses 100% menu sistem)
+│   │       ├── sidebarpetugas.php     => Sidebar Petugas (Menu kelola akun 'user' disembunyikan)
+│   │       ├── sidebaranggota.php     => Sidebar Anggota PMR (Menu kelola 'user', 'kategori', & 'laporan' disembunyikan)
+│   │       └── footer.php
+│   │   
+│   │       
+│   │       
+│   │       
+│   │
+│   ├── user/   ← (ADMIN & PETUGAS)
+│   │   ├── dashboard/
+│   │   │   ├── dashboardadmin.php
+│   │   │   └── dashboardpetugas.php
+│   │   │   └── dashboardanggota.php
+│   │   ├── user/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   └── show.php
+│   │   ├── siswa/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   └── show.php
+│   │   ├── guru/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   └── show.php
+│   │   ├── kategori/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   └── show.php
+│   │   ├── barang/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   └── show.php
+│   │   ├── penanganan/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   ├── edit.php
+│   │   │   └── show.php
+│   │   |
+│   │   └── laporan/
+│   │       ├── laporanharian.php
+│   │       ├── cetaklaporanharian.php
+│   │       ├── laporanbulanan.php
+│   │       ├── cetaklaporanbulanan.php
+│   │       ├── laporantahunan.php
+│   │       └── cetaklaporantahunan.php
+│   │
+│   |
+|   |
+│   ├── landing/   ← (PUBLIC / TANPA LOGIN)
+│   │   ├── home.php          (Halaman beranda utama yang menampilkan grafik tren penyakit sekolah terkini dan info fasilitas UKS)
+│   │   ├── cekriwayat.php    (Halaman form pencarian mandiri riwayat medis pasien dengan pengaman enkripsi verifikasi ganda NIS/NIP + Nomor HP rahasia agar data pasien tidak bocor ke orang lain)
+│   │   ├── daftarobat.php    (Halaman yang menampilkan seluruh katalog obat bebas dan alkes yang tersedia di lemari UKS)
+│   │   ├── detailobat.php    (Tampil ketika diklik 'selengkapnya' pada daftarobat.php untuk melihat khasiat dan aturan pakai)
+│   │   ├── daftarkategori.php(Halaman filter pencarian obat berdasarkan kategori seperti Obat Bebas, Obat Keras, atau P3K)
+│   │   ├── tentang.php       (Halaman profil UKS Digital SMKN 1 Karang Baru beserta bagan struktur organisasi PMR)
+│   │   ├── kontak.php        (Halaman informasi nomor darurat UKS, lokasi ruangan, dan jadwal piket guru/anggota PMR)
+│   │   └── daftarisi.php     (Halaman peta situs/sitemap untuk mempermudah navigasi penelusuran seluruh link publik)
+│   │
+│   ├── auth/   
+│   │   ├── logout.php
+│   │   ├── loginuser.php
+│   │
+│   └── errors/   ← (GLOBAL ERROR HANDLER)
+│       ├── 404.php
+│       ├── 403.php
+│       └── 500.php
+│
+└── proses/
+   ├── koneksi.php
+   ├── session.php
+   ├── prosesuser.php
+   ├── prosespasien.php
+   ├── proseskategori.php
+   ├── prosesbarang.php
+   ├── prosespenanganan.php
+   └── proseslaporan.php
