@@ -20,13 +20,12 @@ aplikasisuksdigital/
 │   │   │   ├── navbar.php    =>  Menu atas halaman depan (Ada tombol login pengurus UKS)
 │   │   │   └── footer.php
 │   │   ├── user/             # Komponen untuk Pengurus UKS setelah berhasil login
-│   │       ├── navbar.php             =>  Menu atas internal (Ada foto profil, nama user, role, & tombol logout)
-│   │       ├── sidebaradmin.php       => Sidebar khusus Admin (Bisa klik & akses 100% menu sistem)
-│   │       ├── sidebarpetugas.php     => Sidebar Petugas (Menu kelola akun 'user' disembunyikan)
-│   │       ├── sidebaranggota.php     => Sidebar Anggota PMR (Menu kelola 'user', 'kategori', & 'laporan' disembunyikan)
-│   │       └── footer.php
-│   │   
-│   │       
+│   │   |   ├── navbar.php             =>  Menu atas internal (Ada foto profil, nama user, role, & tombol logout)
+│   │   |   ├── sidebaradmin.php       => Sidebar khusus Admin (Bisa klik & akses 100% menu sistem)
+│   │   |   ├── sidebarpetugas.php     => Sidebar Petugas (Menu kelola akun 'user' disembunyikan)
+│   │   |   ├── sidebaranggota.php     => Sidebar Anggota PMR (Menu kelola 'user', 'kategori', & 'laporan' disembunyikan)
+│   │   ├── header.php/
+│   │   ├── footerjs.php/  
 │   │       
 │   │       
 │   │
@@ -99,7 +98,8 @@ aplikasisuksdigital/
    ├── koneksi.php
    ├── session.php
    ├── prosesuser.php
-   ├── prosesdashboarduser.php
+   ├── prosesloginuser.php
+   ├── proseslogout.php
    ├── prosespasien.php
    ├── proseskategori.php
    ├── prosesbarang.php

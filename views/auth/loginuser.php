@@ -1,86 +1,100 @@
-<?php // auth/loginuser.php - Versi dengan Label & Show/Hide Password ?>
-<div class="d-flex justify-content-center align-items-center" style="min-height:80vh;">
-  <div class="login-box" style="width:400px;">
-    <div class="card card-outline card-primary shadow">
-      <div class="card-header text-center">
-        <a href="index.php?halaman=home" class="h1"><b>CV</b> Digital</a>
-      </div>
-      <div class="card-body">
-        <p class="login-box-msg">Silakan masuk untuk memulai sesi</p>
+<?php
+// Proteksi ganda: jika pengurus sudah memegang sesi login aktif, langsung lempar ke dashboardnya
+if (isset($_SESSION['iduser']) && isset($_SESSION['role'])) {
+    header("Location: index.php?halaman=dashboard" . $_SESSION['role']);
+    exit();
+}
 
-        <?php if(isset($_GET['error'])): ?>
-          <div class="alert alert-danger py-2 small"><?= htmlspecialchars($_GET['error']) ?></div>
-        <?php endif; ?>
+// Menangkap sinyal alert pesan kesalahan dari parameter URL browser
+$pesan = $_GET['pesan'] ?? '';
+?>
 
-        <form action="proses/proseslogin.php" method="post">
-          
-          <!-- Username dengan Label -->
-          <div class="form-group">
-            <label for="username">Username:</label>
-            <div class="input-group">
-              <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan username Anda" required value="admin">
-              <div class="input-group-append">
-                <div class="input-group-text"><span class="fas fa-user"></span></div>
-              </div>
-            </div>
-            <small class="text-muted">Contoh: admin, guru</small>
-          </div>
-
-          <!-- Password dengan Label + Mata -->
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <div class="input-group">
-              <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password Anda" required value="admin123">
-              <div class="input-group-append">
-                <!-- Tombol Mata -->
-                <div class="input-group-text" style="cursor:pointer;" onclick="togglePassword()">
-                  <span class="fas fa-eye" id="eyeIcon"></span>
+<div class="d-flex justify-content-center py-5">
+    <div class="card shadow-sm" style="width:100%;max-width:420px;border:1px solid #7e7e7e;border-radius:10px;">
+        <div class="card-body p-4">
+            
+            <!-- Kepala Panel Login (Nuansa Medis Asri Hijau Sukses) -->
+            <div class="text-center mb-4">
+                <div class="mb-2">
+                    <span class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width:60px;height:60px;">
+                        <i class="fas fa-user-shield fa-2x"></i>
+                    </span>
                 </div>
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
+                <h4 class="font-weight-bold mb-1">Login Pengurus UKS</h4>
+                <p class="text-muted mb-0 small">UKS Digital SMKN 1 Karang Baru</p>
+            </div>
+
+            <!-- BLOK KENDALI PEMBERITAHUAN ERROR INTERAKTIF -->
+            <?php if ($pesan === 'gagal'): ?>
+                <div class="alert alert-danger alert-dismissible fade show small py-2" role="alert">
+                    <i class="fas fa-exclamation-triangle mr-1"></i> <strong>Login Gagal!</strong> Kredensial akun tidak ditemukan.
                 </div>
-              </div>
-            </div>
-            <small class="text-muted">Gunakan password yang terdaftar di JSON</small>
-          </div>
+            <?php elseif ($pesan === 'timeout'): ?>
+                <div class="alert alert-warning alert-dismissible fade show small py-2" role="alert">
+                    <i class="fas fa-clock mr-1"></i> <strong>Sesi Berakhir!</strong> Waktu tunggu habis karena 1 jam pasif.
+                </div>
+            <?php elseif ($pesan === 'belum_login' || $pesan === 'akses_ditolak'): ?>
+                <div class="alert alert-danger alert-dismissible fade show small py-2" role="alert">
+                    <i class="fas fa-ban mr-1"></i> <strong>Akses Ditolak!</strong> Silakan login untuk membuka menu ini.
+                </div>
+            <?php endif; ?>
 
-          <div class="row mt-4">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">Remember Me</label>
-              </div>
+            <!-- Formulir Pengiriman Data Otentikasi (Diarahkan ke berkas login khusus) -->
+            <form action="proses/prosesloginuser.php" method="POST">
+                
+                <!-- Blok Input Kunci Kredensial Username -->
+                <div class="form-group mb-3">
+                    <label class="mb-1 text-dark small font-weight-bold">
+                        <i class="fas fa-user mr-1 text-success"></i> Username
+                    </label>
+                    <input type="text" name="username" class="form-control" placeholder="Masukkan username pengurus" required autofocus>
+                </div>
+                
+                <!-- Blok Input Sandi Rahasia + Modul Fitur Intuitif Pengintip Mata Guru -->
+                <div class="form-group mb-4">
+                    <label class="mb-1 text-dark small font-weight-bold">
+                        <i class="fas fa-lock mr-1 text-success"></i> Password
+                    </label>
+                    <div class="input-group">
+                        <input type="password" name="password" id="passwordUser" class="form-control" placeholder="Masukkan password sandi" required>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" id="togglePasswordUser" title="Tampilkan password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tombol Konfirmasi Validasi Data -->
+                <button type="submit" name="login" class="btn btn-success btn-block font-weight-bold text-white shadow-sm">
+                    <i class="fas fa-sign-in-alt mr-1"></i> MASUK KE SISTEM
+                </button>
+            </form>
+            
+            <!-- Akses Jalur Pintas Kembali ke Antarmuka Publik -->
+            <div class="text-center mt-4">
+                <a href="index.php?halaman=home" class="text-muted small font-weight-bold">
+                    <i class="fas fa-arrow-left mr-1"></i> Kembali ke Beranda Utama
+                </a>
             </div>
-            <div class="col-4">
-              <button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
-            </div>
-          </div>
-        </form>
 
-        <p class="mb-0 mt-3 text-center">
-          <a href="index.php?halaman=registerpeserta">Registrasi sebagai Peserta</a>
-        </p>
-        <div class="alert alert-info mt-3 py-2 small">
-          <b>Login Default:</b><br>
-          Username: <code>admin</code> / Password: <code>admin123</code>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
+<!-- Mengadopsi Penuh Script Aksi Interaktif Tombol Mata Guru -->
 <script>
-function togglePassword() {
-  const pass = document.getElementById('password');
-  const eye = document.getElementById('eyeIcon');
-  if (pass.type === 'password') {
-    pass.type = 'text';
-    eye.classList.remove('fa-eye');
-    eye.classList.add('fa-eye-slash');
-  } else {
-    pass.type = 'password';
-    eye.classList.remove('fa-eye-slash');
-    eye.classList.add('fa-eye');
-  }
-}
+    document.getElementById('togglePasswordUser').addEventListener('click', function() {
+        const password = document.getElementById('passwordUser');
+        const icon = this.querySelector('i');
+        if (password.type === 'password') {
+            password.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+            this.title = 'Sembunyikan password';
+        } else {
+            password.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+            this.title = 'Tampilkan password';
+        }
+    });
 </script>

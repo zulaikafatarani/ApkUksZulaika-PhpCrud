@@ -1,0 +1,112 @@
+mysql> use aplikasiuks;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_aplikasiuks |
++-----------------------+
+| barang                |
+| detailpenanganan      |
+| guru                  |
+| kategori              |
+| penanganan            |
+| siswa                 |
+| user                  |
++-----------------------+
+7 rows in set (0.02 sec)
+
+mysql> desc barang;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| idbarang          | int         | NO   | PRI | NULL    | auto_increment |
+| idkategori        | int         | NO   | MUL | NULL    |                |
+| namabarang        | varchar(50) | NO   |     | NULL    |                |
+| stok              | int         | NO   |     | 0       |                |
+| satuan            | varchar(50) | NO   |     | pcs     |                |
+| tanggalkadaluarsa | date        | NO   |     | NULL    |                |
+| tanggalmasuk      | date        | NO   |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.06 sec)
+
+mysql> desc detailpenanganan;
++--------------------+------+------+-----+---------+----------------+
+| Field              | Type | Null | Key | Default | Extra          |
++--------------------+------+------+-----+---------+----------------+
+| iddetailpenanganan | int  | NO   | PRI | NULL    | auto_increment |
+| idpenanganan       | int  | NO   | MUL | NULL    |                |
+| idbarang           | int  | NO   | MUL | NULL    |                |
+| jumlahkeluar       | int  | NO   |     | NULL    |                |
++--------------------+------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> desc guru;
++-----------------+---------------+------+-----+---------+----------------+
+| Field           | Type          | Null | Key | Default | Extra          |
++-----------------+---------------+------+-----+---------+----------------+
+| idguru          | int           | NO   | PRI | NULL    | auto_increment |
+| nip             | varchar(30)   | YES  | UNI | NULL    |                |
+| namaguru        | varchar(50)   | NO   |     | NULL    |                |
+| riwayatpenyakit | varchar(50)   | YES  |     | NULL    |                |
+| jeniskelamin    | enum('L','P') | NO   |     | NULL    |                |
+| foto            | varchar(50)   | NO   |     | NULL    |                |
+| alamat          | varchar(100)  | NO   |     | NULL    |                |
+| nohp            | varchar(30)   | NO   |     | NULL    |                |
++-----------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.02 sec)
+
+mysql> desc kategori;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| idkategori   | int         | NO   | PRI | NULL    | auto_increment |
+| namakategori | varchar(50) | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.02 sec)
+
+mysql> desc user;
++----------+-----------------------------------+------+-----+---------+----------------+
+| Field    | Type                              | Null | Key | Default | Extra          |
++----------+-----------------------------------+------+-----+---------+----------------+
+| iduser   | int                               | NO   | PRI | NULL    | auto_increment |
+| username | varchar(50)                       | NO   |     | NULL    |                |
+| password | varchar(50)                       | NO   |     | NULL    |                |
+| namauser | varchar(50)                       | NO   |     | NULL    |                |
+| alamat   | varchar(100)                      | NO   |     | NULL    |                |
+| role     | enum('admin','petugas','anggota') | NO   |     | petugas |                |
+| nohp     | varchar(30)                       | NO   |     | NULL    |                |
+| foto     | varchar(50)                       | NO   |     | NULL    |                |
++----------+-----------------------------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> desc siswa;
++-----------------+-------------------------------------+------+-----+------------+----------------+
+| Field           | Type                                | Null | Key | Default    | Extra          |
++-----------------+-------------------------------------+------+-----+------------+----------------+
+| idsiswa         | int                                 | NO   | PRI | NULL       | auto_increment |
+| nis             | varchar(30)                         | YES  | UNI | NULL       |                |
+| namasiswa       | varchar(50)                         | NO   |     | NULL       |                |
+| kelas           | varchar(50)                         | NO   |     | NULL       |                |
+| jeniskelamin    | enum('L','P')                       | YES  |     | NULL       |                |
+| golongandarah   | enum('A','B','AB','O','Tidak Tahu') | NO   |     | Tidak Tahu |                |
+| riwayatpenyakit | varchar(50)                         | YES  |     | NULL       |                |
+| riwayatalergi   | varchar(50)                         | YES  |     | NULL       |                |
+| foto            | varchar(50)                         | NO   |     | NULL       |                |
+| alamat          | varchar(100)                        | NO   |     | NULL       |                |
+| nohp            | varchar(30)                         | NO   |     | NULL       |                |
++-----------------+-------------------------------------+------+-----+------------+----------------+
+11 rows in set (0.01 sec)
+
+mysql> desc penanganan;
++-------------------+------------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field             | Type                                                                         | Null | Key | Default | Extra          |
++-------------------+------------------------------------------------------------------------------+------+-----+---------+----------------+
+| idpenanganan      | int                                                                          | NO   | PRI | NULL    | auto_increment |
+| iduser            | int                                                                          | NO   | MUL | NULL    |                |
+| idsiswa           | int                                                                          | YES  | MUL | NULL    |                |
+| idguru            | int                                                                          | YES  | MUL | NULL    |                |
+| tanggalpenanganan | date                                                                         | NO   |     | NULL    |                |
+| keluhan           | varchar(50)                                                                  | NO   |     | NULL    |                |
+| tindakan          | varchar(50)                                                                  | NO   |     | NULL    |                |
+| statuspasien      | enum('kembali ke kelas','istirahat di uks','pulang','rujuk ke puskesmas/RS') | NO   |     | NULL    |                |
++-------------------+------------------------------------------------------------------------------+------+-----+---------+----------------+
+8 rows in set (0.01 sec)
