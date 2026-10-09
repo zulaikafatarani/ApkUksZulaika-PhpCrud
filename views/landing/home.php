@@ -180,6 +180,7 @@ $queryKritis = mysqli_query($koneksi, "
 </section>
 
 <!-- OBAT TERBARU -->
+<!-- OBAT TERBARU - FIX GAMBAR -->
 <section class="content py-5 bg-white">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -189,14 +190,28 @@ $queryKritis = mysqli_query($koneksi, "
         <div class="row">
             <?php if(mysqli_num_rows($queryObatBaru) > 0): ?>
                 <?php while($obat = mysqli_fetch_assoc($queryObatBaru)): 
-                    $gambar = 'assets/images/barang/default_obat.png';
-                    // Karena tabel tidak ada kolom foto, cek file berdasarkan idbarang.jpg kalau kamu upload manual
-                    $cekFile = 'assets/images/barang/'.$obat['idbarang'].'.jpg';
-                    if(file_exists($cekFile)) $gambar = $cekFile;
+                    // FIX PATH: cek dari root, bukan dari views/landing/
+                    $base = __DIR__ . '/../../assets/images/barang/';
+                    $baseUrl = 'assets/images/barang/';
+                    $gambar = $baseUrl.'default_obat.png'; // nama file kamu yang ada garis bawah
+
+                    // 1. kalau ada kolom foto
+                    if(!empty($obat['foto']) && file_exists($base.$obat['foto'])){
+                        $gambar = $baseUrl.$obat['foto'];
+                    }
+                    // 2. kalau pakai sistem id.jpg kayak siswa/guru
+                    elseif(file_exists($base.$obat['idbarang'].'.jpg')){
+                        $gambar = $baseUrl.$obat['idbarang'].'.jpg';
+                    }
+                    elseif(file_exists($base.$obat['idbarang'].'.png')){
+                        $gambar = $baseUrl.$obat['idbarang'].'.png';
+                    }
                 ?>
                 <div class="col-md-3 col-6 mb-4">
-                    <div class="card h-100 shadow-sm border">
-                        <img src="<?= $gambar; ?>" class="card-img-top" style="height:160px; object-fit:cover;">
+                    <div class="card h-100 shadow-sm border" style="border-radius:12px;">
+                        <div style="height:180px; background:#f8f9fa;" class="d-flex align-items-center justify-content-center overflow-hidden">
+                            <img src="<?= $gambar; ?>" class="card-img-top" style="height:100%; width:100%; object-fit:contain; border-radius:12px 12px 0 0;" onerror="this.src='assets/images/barang/default_obat.png'">
+                        </div>
                         <div class="card-body d-flex flex-column">
                             <span class="badge badge-success mb-2 align-self-start"><?= htmlspecialchars($obat['namakategori'] ?? 'Umum'); ?></span>
                             <h6 class="font-weight-bold"><?= htmlspecialchars($obat['namabarang']); ?></h6>
@@ -205,7 +220,7 @@ $queryKritis = mysqli_query($koneksi, "
                                 Masuk: <?= date('d M Y', strtotime($obat['tanggalmasuk'])); ?><br>
                                 Exp: <?= date('d M Y', strtotime($obat['tanggalkadaluarsa'])); ?>
                             </small>
-                            <a href="index.php?halaman=detailobat&id=<?= $obat['idbarang']; ?>" class="btn btn-success btn-sm mt-auto"><i class="fas fa-eye mr-1"></i> Aturan Pakai</a>
+                            <a href="index.php?halaman=detailobat&id=<?= $obat['idbarang']; ?>" class="btn btn-success btn-sm mt-auto rounded-pill"><i class="fas fa-eye mr-1"></i> Aturan Pakai</a>
                         </div>
                     </div>
                 </div>

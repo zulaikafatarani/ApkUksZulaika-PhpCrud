@@ -1,45 +1,72 @@
-<?php 
-batasi_akses_role(['admin', 'petugas', 'anggota']);
-$q = mysqli_query($koneksi, "SELECT * FROM siswa ORDER BY idsiswa DESC"); 
-$status = $_GET['status'] ?? '';
-?>
-<div class="content-header"><div class="container-fluid"><div class="row mb-2"><div class="col-sm-6"><h1 class="m-0 text-success font-weight-bold"><i class="fas fa-user-graduate mr-2"></i>Data Pasien Siswa</h1></div><div class="col-sm-6 text-right"><a href="index.php?halaman=createsiswa" class="btn btn-success font-weight-bold shadow-sm rounded-pill px-3 btn-sm"><i class="fas fa-plus-circle mr-1"></i> Tambah Siswa</a></div></div></div></div>
+<?php
+// views/user/siswa/index.php - FINAL STYLE SAMA + ADA FOTO
+if (!isset($koneksi)) include __DIR__.'/../../proses/koneksi.php';
+batasi_akses_role(['admin','petugas']);
 
+$q = mysqli_query($koneksi, "SELECT * FROM siswa ORDER BY idsiswa DESC");
+?>
+<div class="content-header">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <h3 class="m-0 font-weight-bold text-success"><i class="fas fa-user-graduate mr-2"></i>Data Pasien Siswa</h3>
+    <a href="index.php?halaman=createsiswa" class="btn btn-success btn-sm rounded-pill shadow"><i class="fas fa-plus mr-1"></i> Tambah Siswa</a>
+  </div>
+</div>
 <div class="content"><div class="container-fluid">
-<?php if ($status === 'sukses_tambah'): ?><div class="alert alert-success small py-2"><i class="fas fa-check-circle mr-1"></i> Siswa berhasil ditambah!</div>
-<?php elseif ($status === 'sukses_ubah'): ?><div class="alert alert-info small py-2">Biodata siswa diperbarui!</div>
-<?php elseif ($status === 'sukses_hapus'): ?><div class="alert alert-warning small py-2">Data siswa dihapus!</div><?php endif; ?>
-
-<div class="card card-success card-outline shadow-sm"><div class="card-body p-0 table-responsive">
-<table class="table table-hover table-striped mb-0">
-<thead class="bg-success text-white"><tr>
-<th width="60" class="text-center">No</th><th width="130">NIS / NISN</th><th>Nama Lengkap Siswa</th><th width="120">Kelas / Jurusan</th><th width="50" class="text-center">L/P</th><th width="140">No HP</th><th>Riwayat Alergi</th><th width="120" class="text-center">Aksi</th>
-</tr></thead>
-<tbody>
-<?php $no=1; if(mysqli_num_rows($q)>0): while($r=mysqli_fetch_assoc($q)): 
-// FIX ANTI ERROR: pakai ?? biar support nis dan nisn
-$nis = $r['nis'] ?? $r['nisn'] ?? '-';
-$jk = $r['jeniskelamin'] ?? $r['jk'] ?? 'L';
-$hp = $r['nohp'] ?? $r['hp_ortu'] ?? $r['no_hp'] ?? '-';
-$alergi = $r['riwayatalergi'] ?? $r['alergi'] ?? '-';
-?>
-<tr class="align-middle">
-<td class="text-center text-muted"><?= $no++ ?></td>
-<td class="font-weight-bold text-secondary"><?= htmlspecialchars($nis) ?></td>
-<td class="font-weight-bold text-dark"><?= htmlspecialchars($r['namasiswa']) ?></td>
-<td><span class="badge badge-info"><?= htmlspecialchars($r['kelas'] ?? '-') ?></span></td>
-<td class="text-center"><?= $jk=='L' ? '<span class="text-primary font-weight-bold">L</span>' : '<span class="text-danger font-weight-bold">P</span>' ?></td>
-<td class="text-muted small"><?= htmlspecialchars($hp) ?></td>
-<td><?php if(!empty($alergi) && $alergi!='-' ): ?><span class="badge badge-danger"><i class="fas fa-exclamation-triangle mr-1"></i><?= htmlspecialchars($alergi) ?></span><?php else: ?><span class="text-muted small font-italic">- Tidak Ada -</span><?php endif; ?></td>
-<td class="text-center">
-<a href="index.php?halaman=showsiswa&id=<?= $r['idsiswa'] ?>" class="btn btn-success btn-xs"><i class="fas fa-eye"></i></a> 
-<a href="index.php?halaman=editsiswa&id=<?= $r['idsiswa'] ?>" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a> 
-<!-- FIX ROUTE HAPUS: prosespasien.php pakai aksi=hapus&jenis=siswa -->
-<a href="proses/prosespasien.php?aksi=hapus&jenis=siswa&id=<?= $r['idsiswa'] ?>" onclick="return confirm('Hapus <?= htmlspecialchars($r['namasiswa']) ?>?')" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>
-</td>
-</tr>
-<?php endwhile; else: ?><tr><td colspan="8" class="text-center py-4 text-muted">Belum ada data siswa</td></tr><?php endif; ?>
-</tbody>
-</table>
-</div></div>
+<div class="card shadow-sm border-0">
+  <div class="card-body p-0 table-responsive">
+    <table class="table table-hover mb-0">
+      <thead style="background:#16a34a; color:white;">
+        <tr>
+          <th class="py-3">No</th>
+          <th class="py-3">Foto</th>
+          <th class="py-3">NIS / NISN</th>
+          <th class="py-3">Nama Lengkap Siswa</th>
+          <th class="py-3">Kelas /<br>Jurusan</th>
+          <th class="py-3">L/P</th>
+          <th class="py-3">No HP</th>
+          <th class="py-3">Riwayat Alergi</th>
+          <th class="py-3 text-center">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php $no=1; while($d=mysqli_fetch_assoc($q)): 
+          // Foto - cek file
+          $namaFoto = $d['foto'] ?? $d['fotosiswa'] ?? '';
+          $pathFoto = 'assets/images/siswa/'.$namaFoto;
+          $foto = (!empty($namaFoto) && file_exists($pathFoto)) ? $pathFoto : 'assets/images/siswa/default.png';
+          // Fallback jika default.png juga belum ada, pakai user default
+          if(!file_exists($foto)) $foto = 'assets/images/user/default.png';
+        ?>
+        <tr>
+          <td class="align-middle text-center"><?= $no++ ?></td>
+          <td class="align-middle">
+            <img src="<?= $foto ?>" width="42" height="42" class="img-circle elevation-1" style="object-fit:cover" onerror="this.src='assets/images/user/default.png'">
+          </td>
+          <td class="align-middle"><b><?= htmlspecialchars($d['nis'] ?? $d['nisn'] ?? '-') ?></b></td>
+          <td class="align-middle"><b><?= htmlspecialchars($d['namasiswa'] ?? '-') ?></b></td>
+          <td class="align-middle">
+            <span class="badge badge-info" style="background:#0891b2;"><?= htmlspecialchars($d['kelas'] ?? '-') ?></span>
+          </td>
+          <td class="align-middle"><b class="text-danger"><?= htmlspecialchars($d['jeniskelamin'] ?? $d['jk'] ?? $d['gender'] ?? 'P') ?></b></td>
+          <td class="align-middle"><small class="text-muted"><?= htmlspecialchars($d['nohp'] ?? $d['no_hp'] ?? '-') ?></small></td>
+          <td class="align-middle">
+            <?php 
+            $alergi = trim($d['riwayatalergi'] ?? $d['alergi'] ?? '');
+            if(empty($alergi) || strtolower($alergi)=='-' || strtolower($alergi)=='tidak ada'): ?>
+              <i class="text-muted small">- Tidak Ada -</i>
+            <?php else: ?>
+              <span class="badge badge-danger"><i class="fas fa-exclamation-triangle mr-1"></i><?= htmlspecialchars($alergi) ?></span>
+            <?php endif; ?>
+          </td>
+          <td class="align-middle text-center">
+            <a href="index.php?halaman=showsiswa&id=<?= $d['idsiswa'] ?>" class="btn btn-success btn-xs"><i class="fas fa-eye"></i></a>
+            <a href="index.php?halaman=editsiswa&id=<?= $d['idsiswa'] ?>" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
+            <a href="proses/prosespasien.php?hapus_siswa=<?= $d['idsiswa'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Hapus data siswa ini?')"><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+        <?php endwhile; ?>
+      </tbody>
+    </table>
+  </div>
+</div>
 </div></div>

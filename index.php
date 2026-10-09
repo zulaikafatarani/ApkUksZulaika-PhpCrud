@@ -5,11 +5,10 @@ require_once 'proses/session.php';
 
 $halaman = $_GET['halaman'] ?? 'home';
 
-// Daftar halaman sesuai treediagram
+// Daftar halaman sesuai treediagram - TAMBAHIN detailkategori DISINI
 $authPages = ['loginuser'];
-$landingPages = ['home','cekriwayat','daftarobat','detailobat','daftarkategori','tentang','kontak','daftarisi'];
+$landingPages = ['home','cekriwayat','daftarobat','detailobat','daftarkategori','detailkategori','tentang','kontak','daftarisi'];
 $isPublic = in_array($halaman, $authPages) || in_array($halaman, $landingPages) || $halaman === 'logout';
-
 /*
 |[STRIPPED 74 bytes]
 | ZONA PUBLIC - TIDAK PAKAI ADMINLTE LAYOUT (ANTI KEDIP)

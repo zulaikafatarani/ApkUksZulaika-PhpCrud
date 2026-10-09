@@ -2,22 +2,19 @@
 require_once 'koneksi.php';
 require_once 'session.php';
 
-// Ambil aksi dan jenis dari URL: ?aksi=tambah&jenis=siswa atau guru
 $aksi = strtolower($_GET['aksi'] ?? $_POST['aksi'] ?? '');
 $jenis = strtolower($_GET['jenis'] ?? $_POST['jenis'] ?? '');
 
-// Validasi jenis - HARUS siswa atau guru
 if(!in_array($jenis, ['siswa','guru'])){
     header("Location: ../index.php?halaman=siswa&status=jenis_tidak_valid");
     exit();
 }
 
-// Tentukan tabel & hak akses sesuai jenis (sesuai roadmap)
 if($jenis == 'siswa'){
-    batasi_akses_role(['admin','petugas','anggota']); // siswa boleh diolah anggota PMR
+    batasi_akses_role(['admin','petugas','anggota']);
     $tabel = 'siswa'; $idField = 'idsiswa'; $folder = 'siswa';
 } else {
-    batasi_akses_role(['admin','petugas']); // guru hanya admin & petugas
+    batasi_akses_role(['admin','petugas']);
     $tabel = 'guru'; $idField = 'idguru'; $folder = 'guru';
 }
 
@@ -26,61 +23,81 @@ function uploadFotoPasien($file, $folder, $old = null){
     if(!is_dir($dir)) mkdir($dir, 0777, true);
     if($file['error'] == 4) return $old ?? 'default.png';
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-    if(!in_array($ext, ['jpg','jpeg','png','webp'])) return false;
+    if(!in_array($ext, ['jpg','jpeg','png','webp'])) return $old ?? 'default.png';
     $baru = uniqid($folder.'_').'.'.$ext;
     if(move_uploaded_file($file['tmp_name'], $dir.$baru)){
         if($old && $old != 'default.png' && file_exists($dir.$old)) unlink($dir.$old);
         return $baru;
     }
-    return false;
+    return $old ?? 'default.png';
 }
 
 // ================= 1. TAMBAH =================
 if($aksi == 'tambah' || $aksi == 'tambahsiswa' || $aksi == 'tambahguru'){
     $foto = uploadFotoPasien($_FILES['foto'], $folder);
-    if($foto === false){ header("Location: ../index.php?halaman=$jenis&status=gagal_foto"); exit(); }
 
     if($jenis == 'siswa'){
-        // Kolom asli sesuai LAPORAN halaman 4: nis, namasiswa, kelas, jeniskelamin, golongandarah, riwayatpenyakit, riwayatalergi, foto, alamat, nohp
-        $stmt = mysqli_prepare($koneksi, "INSERT INTO siswa (nis, namasiswa, kelas, jeniskelamin, golongandarah, riwayatpenyakit, riwayatalergi, foto, alamat, nohp) VALUES (?,?,?,?,?,?,?,?,?,?)");
-        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['alergi'] ?? $_POST['penyakit_bawaan'] ?? null;
-        $riwAlergi = $_POST['riwayatalergi'] ?? $_POST['alergi'] ?? null;
-        mysqli_stmt_bind_param($stmt, "ssssssssss", $_POST['nis'] ?? $_POST['nisn'], $_POST['namasiswa'], $_POST['kelas'], $_POST['jeniskelamin'] ?? $_POST['jk'], $_POST['golongandarah'], $riwPenyakit, $riwAlergi, $foto, $_POST['alamat'], $_POST['nohp'] ?? $_POST['hp_ortu']);
-    } else {
-        // Kolom asli guru: nip, namaguru, riwayatpenyakit, jeniskelamin, foto, alamat, nohp
-        $stmt = mysqli_prepare($koneksi, "INSERT INTO guru (nip, namaguru, riwayatpenyakit, jeniskelamin, foto, alamat, nohp) VALUES (?,?,?,?,?,?,?)");
-        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['penyakit_bawaan'] ?? null;
-        mysqli_stmt_bind_param($stmt, "sssssss", $_POST['nip'], $_POST['namaguru'], $riwPenyakit, $_POST['jeniskelamin'] ?? $_POST['jk'], $foto, $_POST['alamat'], $_POST['nohp'] ?? $_POST['hp_guru']);
-    }
+        // FIX: jadikan variabel dulu, jangan $_POST langsung di bind_param
+        $nis = $_POST['nis'] ?? $_POST['nisn'] ?? '';
+        $nama = $_POST['namasiswa'] ?? '';
+        $kelas = $_POST['kelas'] ?? '';
+        $jk = $_POST['jeniskelamin'] ?? $_POST['jk'] ?? 'L';
+        $goldar = $_POST['golongandarah'] ?? '';
+        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['alergi'] ?? $_POST['penyakit_bawaan'] ?? '';
+        $riwAlergi = $_POST['riwayatalergi'] ?? $_POST['alergi'] ?? '';
+        $alamat = $_POST['alamat'] ?? '';
+        $nohp = $_POST['nohp'] ?? $_POST['hp_ortu'] ?? '';
 
-    if(mysqli_stmt_execute($stmt)){
-        header("Location: ../index.php?halaman=$jenis&status=sukses_tambah");
+        $stmt = mysqli_prepare($koneksi, "INSERT INTO siswa (nis, namasiswa, kelas, jeniskelamin, golongandarah, riwayatpenyakit, riwayatalergi, foto, alamat, nohp) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        mysqli_stmt_bind_param($stmt, "ssssssssss", $nis, $nama, $kelas, $jk, $goldar, $riwPenyakit, $riwAlergi, $foto, $alamat, $nohp);
     } else {
-        header("Location: ../index.php?halaman=$jenis&status=gagal&msg=".urlencode(mysqli_error($koneksi)));
+        $nip = $_POST['nip'] ?? '';
+        $nama = $_POST['namaguru'] ?? '';
+        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['penyakit_bawaan'] ?? '';
+        $jk = $_POST['jeniskelamin'] ?? $_POST['jk'] ?? 'L';
+        $alamat = $_POST['alamat'] ?? '';
+        $nohp = $_POST['nohp'] ?? $_POST['hp_guru'] ?? '';
+
+        $stmt = mysqli_prepare($koneksi, "INSERT INTO guru (nip, namaguru, riwayatpenyakit, jeniskelamin, foto, alamat, nohp) VALUES (?,?,?,?,?,?,?)");
+        mysqli_stmt_bind_param($stmt, "sssssss", $nip, $nama, $riwPenyakit, $jk, $foto, $alamat, $nohp);
     }
-    exit();
+    mysqli_stmt_execute($stmt);
+    header("Location: ../index.php?halaman=$jenis&status=sukses_tambah"); exit();
 }
 
-// ================= 2. UBAH / EDIT =================
+// ================= 2. UBAH / EDIT - INI YANG ERROR TADI =================
 if($aksi == 'ubah' || $aksi == 'edit' || $aksi == 'ubahsiswa' || $aksi == 'ubahguru'){
     $id = (int)($_POST['id'] ?? $_POST['idsiswa'] ?? $_POST['idguru'] ?? 0);
     $fotoLama = $_POST['foto_lama'] ?? 'default.png';
     $foto = uploadFotoPasien($_FILES['foto'], $folder, $fotoLama);
-    if($foto === false){ header("Location: ../index.php?halaman=$jenis&status=gagal_foto"); exit(); }
 
     if($jenis == 'siswa'){
+        // FIX WAJIB: semua jadi variabel
+        $nis = $_POST['nis'] ?? $_POST['nisn'] ?? '';
+        $nama = $_POST['namasiswa'] ?? '';
+        $kelas = $_POST['kelas'] ?? '';
+        $jk = $_POST['jeniskelamin'] ?? $_POST['jk'] ?? 'L';
+        $goldar = $_POST['golongandarah'] ?? '';
+        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['alergi'] ?? '';
+        $riwAlergi = $_POST['riwayatalergi'] ?? '';
+        $alamat = $_POST['alamat'] ?? '';
+        $nohp = $_POST['nohp'] ?? $_POST['hp_ortu'] ?? '';
+
         $stmt = mysqli_prepare($koneksi, "UPDATE siswa SET nis=?, namasiswa=?, kelas=?, jeniskelamin=?, golongandarah=?, riwayatpenyakit=?, riwayatalergi=?, foto=?, alamat=?, nohp=? WHERE idsiswa=?");
-        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['alergi'] ?? null;
-        $riwAlergi = $_POST['riwayatalergi'] ?? null;
-        mysqli_stmt_bind_param($stmt, "ssssssssssi", $_POST['nis'] ?? $_POST['nisn'], $_POST['namasiswa'], $_POST['kelas'], $_POST['jeniskelamin'] ?? $_POST['jk'], $_POST['golongandarah'], $riwPenyakit, $riwAlergi, $foto, $_POST['alamat'], $_POST['nohp'] ?? $_POST['hp_ortu'], $id);
+        mysqli_stmt_bind_param($stmt, "ssssssssssi", $nis, $nama, $kelas, $jk, $goldar, $riwPenyakit, $riwAlergi, $foto, $alamat, $nohp, $id);
     } else {
+        $nip = $_POST['nip'] ?? '';
+        $nama = $_POST['namaguru'] ?? '';
+        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['penyakit_bawaan'] ?? '';
+        $jk = $_POST['jeniskelamin'] ?? $_POST['jk'] ?? 'L';
+        $alamat = $_POST['alamat'] ?? '';
+        $nohp = $_POST['nohp'] ?? $_POST['hp_guru'] ?? '';
+
         $stmt = mysqli_prepare($koneksi, "UPDATE guru SET nip=?, namaguru=?, riwayatpenyakit=?, jeniskelamin=?, foto=?, alamat=?, nohp=? WHERE idguru=?");
-        $riwPenyakit = $_POST['riwayatpenyakit'] ?? $_POST['penyakit_bawaan'] ?? null;
-        mysqli_stmt_bind_param($stmt, "sssssssi", $_POST['nip'], $_POST['namaguru'], $riwPenyakit, $_POST['jeniskelamin'] ?? $_POST['jk'], $foto, $_POST['alamat'], $_POST['nohp'] ?? $_POST['hp_guru'], $id);
+        mysqli_stmt_bind_param($stmt, "sssssssi", $nip, $nama, $riwPenyakit, $jk, $foto, $alamat, $nohp, $id);
     }
     mysqli_stmt_execute($stmt);
-    header("Location: ../index.php?halaman=$jenis&status=sukses_ubah");
-    exit();
+    header("Location: ../index.php?halaman=$jenis&status=sukses_ubah"); exit();
 }
 
 // ================= 3. HAPUS =================
@@ -93,10 +110,6 @@ if($aksi == 'hapus' || $aksi == 'hapussiswa' || $aksi == 'hapusguru'){
         }
     }
     mysqli_query($koneksi, "DELETE FROM $tabel WHERE $idField=$id");
-    header("Location: ../index.php?halaman=$jenis&status=sukses_hapus");
-    exit();
+    header("Location: ../index.php?halaman=$jenis&status=sukses_hapus"); exit();
 }
-
-header("Location: ../index.php?halaman=403");
-exit();
 ?>
