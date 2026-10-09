@@ -76,13 +76,14 @@
                 <li class="nav-header font-weight-bold text-muted">SISTEM KELUAR</li>
 
                 <!-- 5. Menu Logout -->
+                <li class="nav-header font-weight-bold text-muted">SISTEM KELUAR</li>
+                <!-- FIX LOGOUT ANTI PUTIH -->
                 <li class="nav-item">
-                    <a href="index.php?halaman=logout" class="nav-link text-danger">
+                    <a href="proses/proseslogout.php" class="nav-link text-danger" onclick="return confirm('Yakin ingin keluar dari UKS Digital?')">
                         <i class="nav-icon fas fa-power-off"></i>
                         <p>Keluar Aplikasi</p>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>
