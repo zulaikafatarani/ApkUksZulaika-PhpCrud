@@ -1,90 +1,51 @@
 <?php
-// 1. Kunci halaman: Pastikan hanya Admin yang boleh mengakses halaman detail akun ini
+// views/user/user/show.php - DETAIL PENGURUS V2
 batasi_akses_role(['admin']);
+if (!isset($koneksi)) include __DIR__.'/../../../proses/koneksi.php';
 
-// 2. Tangkap ID user dari URL browser
-$iduser = $_GET['id'] ?? '';
+$id = (int)($_GET['id'] ?? 0);
+$data = mysqli_query($koneksi, "SELECT * FROM user WHERE iduser=$id");
+$u = mysqli_fetch_assoc($data);
 
-// 3. Tarik data lengkap user dari database MySQL
-$queryCek = mysqli_query($koneksi, "SELECT * FROM user WHERE iduser = '" . mysqli_real_escape_string($koneksi, $iduser) . "'");
-
-// Jika ID tidak ditemukan, kembalikan ke halaman daftar utama
-if (mysqli_num_rows($queryCek) !== 1) {
-    header("Location: index.php?halaman=user");
-    exit();
+if(!$u){
+  echo '<div class="content"><div class="container-fluid"><div class="alert alert-danger">User ID '.$id.' tidak ada di database!</div><a href="index.php?halaman=user" class="btn btn-secondary">Kembali</a></div></div>';
+  return;
 }
-
-$data = mysqli_fetch_assoc($queryCek);
+$foto = 'assets/images/user/'.($u['foto'] ?: 'default.png');
+if(!file_exists($foto)) $foto='assets/images/user/default.png';
+$role = strtolower($u['role']);
 ?>
-
-<!-- Kepala Halaman (Content Header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 font-weight-bold text-success">
-                    <i class="fas fa-id-card mr-2"></i>Profil Detail Pengurus
-                </h1>
-            </div>
-            <div class="col-sm-6 text-right">
-                <a href="index.php?halaman=user" class="btn btn-outline-secondary font-weight-bold shadow-sm btn-sm rounded-pill px-3">
-                    <i class="fas fa-arrow-left mr-1"></i> Kembali ke Daftar
-                </a>
-            </div>
-        </div>
+<div class="content-header"><div class="container-fluid"><h3 class="font-weight-bold text-success"><i class="fas fa-id-card"></i> Detail Pengurus</h3></div></div>
+<div class="content"><div class="container-fluid">
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-success card-outline text-center shadow">
+      <div class="card-body">
+        <img src="<?= $foto ?>" width="130" height="130" class="img-circle elevation-2 mb-3" style="object-fit:cover;border:3px solid #28a745" onerror="this.src='assets/images/user/default.png'">
+        <h4 class="font-weight-bold"><?= htmlspecialchars($u['namauser']) ?></h4>
+        <p class="text-muted">@<?= htmlspecialchars($u['username']) ?></p>
+        <span class="badge badge-<?= $role=='admin'?'danger':($role=='petugas'?'info':'warning') ?> px-3 py-2"><?= strtoupper($u['role']) ?></span>
+        <hr>
+        <a href="index.php?halaman=edituser&id=<?= $u['iduser'] ?>" class="btn btn-info btn-sm btn-block"><i class="fas fa-edit"></i> Edit Data</a>
+        <a href="index.php?halaman=user" class="btn btn-secondary btn-sm btn-block">Kembali</a>
+      </div>
     </div>
-</div>
-
-<!-- Konten Utama Kartu Detail Profil -->
-<div class="content">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                
-                <!-- Profile Image Card Standard AdminLTE -->
-                <div class="card card-success card-outline shadow-sm">
-                    <div class="card-body box-profile py-4">
-                        <div class="text-center mb-3">
-                            <img class="profile-user-img img-fluid img-circle border-success"
-                                 src="assets/images/user/<?= !empty($data['foto']) ? $data['foto'] : 'default.png'; ?>"
-                                 style="width: 120px; height: 120px; object-fit: cover;"
-                                 alt="Foto Pengurus">
-                        </div>
-
-                        <h3 class="profile-username text-center font-weight-bold text-dark mb-1"><?= htmlspecialchars($data['namauser']); ?></h3>
-                        
-                        <p class="text-muted text-center mb-3">@<?= htmlspecialchars($data['username']); ?></p>
-
-                        <ul class="list-group list-group-unbordered mb-4">
-                            <li class="list-group-item d-flex justify-content-between align-items-center py-2 px-3 bg-light rounded mb-2">
-                                <span class="font-weight-bold text-secondary"><i class="fas fa-key mr-2 text-success"></i>ID Pengurus</span>
-                                <span class="badge badge-secondary px-3 py-1 font-weight-bold">#UKS-<?= $data['iduser']; ?></span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center py-2 px-3 bg-light rounded mb-2">
-                                <span class="font-weight-bold text-secondary"><i class="fas fa-user-shield mr-2 text-success"></i>Hak Akses Role</span>
-                                <?php if ($data['role'] === 'admin'): ?>
-                                    <span class="badge badge-danger text-uppercase px-3 py-1 font-weight-bold">Admin Utama</span>
-                                <?php elseif ($data['role'] === 'petugas'): ?>
-                                    <span class="badge badge-info text-uppercase px-3 py-1 font-weight-bold">Petugas Medis</span>
-                                <?php else: ?>
-                                    <span class="badge badge-warning text-dark text-uppercase px-3 py-1 font-weight-bold">Anggota PMR</span>
-                                <?php endif; ?>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center py-2 px-3 bg-light rounded">
-                                <span class="font-weight-bold text-secondary"><i class="fas fa-lock mr-2 text-success"></i>Sandi Enkripsi</span>
-                                <span class="text-muted font-italic" style="font-size: 0.9rem;">Dilindungi Sistem Aktif</span>
-                            </li>
-                        </ul>
-
-                        <div class="d-flex justify-content-between">
-                            <a href="index.php?halaman=edituser&id=<?= $data['iduser']; ?>" class="btn btn-info font-weight-bold shadow-sm px-4 btn-block">
-                                <i class="fas fa-edit mr-1"></i> Edit Data Akun
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card shadow">
+      <div class="card-header bg-success text-white"><i class="fas fa-info-circle"></i> Data Lengkap Yang Telah Diinput</div>
+      <div class="card-body p-0">
+        <table class="table table-bordered mb-0">
+          <tr><th width="30%">ID User</th><td><?= $u['iduser'] ?></td></tr>
+          <tr><th>Nama Lengkap</th><td><b><?= htmlspecialchars($u['namauser']) ?></b></td></tr>
+          <tr><th>Username</th><td>@<?= htmlspecialchars($u['username']) ?></td></tr>
+          <tr><th>Password</th><td><code>*** terenkripsi ***</code></td></tr>
+          <tr><th>Role / Hak Akses</th><td><?= strtoupper($u['role']) ?> - <?php if($role=='admin') echo 'Admin bisa kelola semua'; elseif($role=='petugas') echo 'Petugas bisa kelola master & medis'; else echo 'Anggota hanya lihat & tangani pasien'; ?></td></tr>
+          <tr><th>Foto File</th><td><?= htmlspecialchars($u['foto'] ?: 'default.png') ?></td></tr>
+          <tr><th>Status</th><td><span class="badge badge-success">AKTIF</span> - Akun bisa dipakai login di halaman loginuser</td></tr>
+        </table>
+      </div>
     </div>
+  </div>
 </div>
+</div></div>

@@ -1,12 +1,15 @@
 <?php
 batasi_akses_role(['admin','petugas','anggota']);
+$isAnggota = strtolower($_SESSION['role']) === 'anggota';
 $status = $_GET['status'] ?? '';
 ?>
 <div class="content-header"><div class="container-fluid">
 <div class="row mb-2"><div class="col-sm-6"><h1 class="m-0 font-weight-bold text-success"><i class="fas fa-boxes mr-1"></i> Lemari Obat & Alkes</h1></div>
 <div class="col-sm-6 text-right">
+<?php if(!$isAnggota): ?>
 <a href="index.php?halaman=createbarang" class="btn btn-success btn-sm rounded-pill px-3"><i class="fas fa-plus mr-1"></i> Tambah Barang</a>
 <a href="index.php?halaman=kategori" class="btn btn-outline-secondary btn-sm rounded-pill px-3"><i class="fas fa-tags mr-1"></i> Kategori</a>
+<?php endif; ?>
 </div></div>
 </div></div>
 
@@ -38,14 +41,16 @@ $isKritis = $stok<=5 && $stok>0;
 <td><small><?= isset($b['tanggalmasuk']) ? date('d/m/Y',strtotime($b['tanggalmasuk'])) : '-' ?></small></td>
 <td class="text-center">
 <a href="index.php?halaman=showbarang&id=<?= $b['idbarang'] ?>" class="btn btn-info btn-xs" title="Detail"><i class="fas fa-eye"></i></a>
+<?php if(!$isAnggota): ?>
 <a href="index.php?halaman=editbarang&id=<?= $b['idbarang'] ?>" class="btn btn-warning btn-xs" title="Edit"><i class="fas fa-edit"></i></a>
 <a href="proses/prosesbarang.php?aksi=hapus&id=<?= $b['idbarang'] ?>" onclick="return confirm('Hapus <?= addslashes($b['namabarang']) ?>?')" class="btn btn-danger btn-xs" title="Hapus"><i class="fas fa-trash"></i></a>
+<?php endif; ?>
 </td>
 </tr>
 <?php endwhile; ?>
 </tbody>
 </table>
 </div>
-<div class="card-footer bg-light small text-muted"><i class="fas fa-info-circle"></i> Merah = kadaluarsa, Kuning = stok ≤5</div>
+<div class="card-footer bg-light small text-muted"><i class="fas fa-info-circle"></i> Merah = kadaluarsa, Kuning = stok ≤5 <?= $isAnggota?'<br><b>Mode Anggota: Hanya Lihat Stok (Read Only)</b>':'' ?></div>
 </div>
 </div></div>

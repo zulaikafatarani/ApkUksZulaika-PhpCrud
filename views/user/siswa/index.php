@@ -1,7 +1,7 @@
 <?php
-// views/user/siswa/index.php - FINAL STYLE SAMA + ADA FOTO
-if (!isset($koneksi)) include __DIR__.'/../../proses/koneksi.php';
-batasi_akses_role(['admin','petugas']);
+// views/user/siswa/index.php - FINAL STYLE SAMA + ADA FOTO + FIX ANGGOTA
+if (!isset($koneksi)) include __DIR__ . '/../../../proses/koneksi.php';
+batasi_akses_role(['admin','petugas','anggota']); // <-- INI KUNCINYA, TAMBAH anggota biar Izza bisa masuk!
 
 $q = mysqli_query($koneksi, "SELECT * FROM siswa ORDER BY idsiswa DESC");
 ?>
@@ -30,28 +30,21 @@ $q = mysqli_query($koneksi, "SELECT * FROM siswa ORDER BY idsiswa DESC");
       </thead>
       <tbody>
         <?php $no=1; while($d=mysqli_fetch_assoc($q)): 
-          // Foto - cek file
-          $namaFoto = $d['foto'] ?? $d['fotosiswa'] ?? '';
+          $namaFoto = $d['foto'] ?? '';
           $pathFoto = 'assets/images/siswa/'.$namaFoto;
           $foto = (!empty($namaFoto) && file_exists($pathFoto)) ? $pathFoto : 'assets/images/siswa/default.png';
-          // Fallback jika default.png juga belum ada, pakai user default
           if(!file_exists($foto)) $foto = 'assets/images/user/default.png';
         ?>
         <tr>
           <td class="align-middle text-center"><?= $no++ ?></td>
-          <td class="align-middle">
-            <img src="<?= $foto ?>" width="42" height="42" class="img-circle elevation-1" style="object-fit:cover" onerror="this.src='assets/images/user/default.png'">
-          </td>
-          <td class="align-middle"><b><?= htmlspecialchars($d['nis'] ?? $d['nisn'] ?? '-') ?></b></td>
+          <td class="align-middle"><img src="<?= $foto ?>" width="42" height="42" class="img-circle elevation-1" style="object-fit:cover" onerror="this.src='assets/images/user/default.png'"></td>
+          <td class="align-middle"><b><?= htmlspecialchars($d['nis'] ?? '-') ?></b></td>
           <td class="align-middle"><b><?= htmlspecialchars($d['namasiswa'] ?? '-') ?></b></td>
+          <td class="align-middle"><span class="badge badge-info" style="background:#0891b2;"><?= htmlspecialchars($d['kelas'] ?? '-') ?></span></td>
+          <td class="align-middle"><b class="text-danger"><?= htmlspecialchars($d['jeniskelamin'] ?? 'P') ?></b></td>
+          <td class="align-middle"><small class="text-muted"><?= htmlspecialchars($d['nohp'] ?? '-') ?></small></td>
           <td class="align-middle">
-            <span class="badge badge-info" style="background:#0891b2;"><?= htmlspecialchars($d['kelas'] ?? '-') ?></span>
-          </td>
-          <td class="align-middle"><b class="text-danger"><?= htmlspecialchars($d['jeniskelamin'] ?? $d['jk'] ?? $d['gender'] ?? 'P') ?></b></td>
-          <td class="align-middle"><small class="text-muted"><?= htmlspecialchars($d['nohp'] ?? $d['no_hp'] ?? '-') ?></small></td>
-          <td class="align-middle">
-            <?php 
-            $alergi = trim($d['riwayatalergi'] ?? $d['alergi'] ?? '');
+            <?php $alergi = trim($d['riwayatalergi'] ?? ''); 
             if(empty($alergi) || strtolower($alergi)=='-' || strtolower($alergi)=='tidak ada'): ?>
               <i class="text-muted small">- Tidak Ada -</i>
             <?php else: ?>
@@ -61,7 +54,7 @@ $q = mysqli_query($koneksi, "SELECT * FROM siswa ORDER BY idsiswa DESC");
           <td class="align-middle text-center">
             <a href="index.php?halaman=showsiswa&id=<?= $d['idsiswa'] ?>" class="btn btn-success btn-xs"><i class="fas fa-eye"></i></a>
             <a href="index.php?halaman=editsiswa&id=<?= $d['idsiswa'] ?>" class="btn btn-info btn-xs"><i class="fas fa-edit"></i></a>
-            <a href="proses/prosespasien.php?hapus_siswa=<?= $d['idsiswa'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Hapus data siswa ini?')"><i class="fas fa-trash"></i></a>
+            <a href="proses/prosespasien.php?jenis=siswa&aksi=hapus&id=<?= $d['idsiswa'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Hapus data siswa ini?')"><i class="fas fa-trash"></i></a>
           </td>
         </tr>
         <?php endwhile; ?>
