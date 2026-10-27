@@ -9,30 +9,6 @@ if(isset($_POST['kirim_konsultasi'])){
 }
 ?>
 <section class="py-5 position-relative" style="background:#f8fafc; overflow:hidden">
-<style>
-:root{ --teal:#0f766e; --teal2:#14b8a6; --mint:#ccfbf1; --mint2:#f0fdfa; --dark:#064e3b; --radius:20px; }
-.uk-card{border-radius:var(--radius); border:1px solid #e0f2f1; background:white; box-shadow:0 10px 35px rgba(15,118,110,0.07); transition:all .5s cubic-bezier(0.4,0,0.2,1); position:relative; overflow:hidden; z-index:5}
-.uk-card::after{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(204,251,241,0.5), transparent); transition:0s; pointer-events:none}
-.uk-card:hover::after{left:100%; transition:0.9s}
-.uk-card:hover{transform:translateY(-6px); box-shadow:0 22px 60px rgba(15,118,110,0.14); border-color:var(--teal2)}
-.icon-box{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--teal),var(--teal2));color:white; transition:all .5s; flex-shrink:0}
-.uk-card:hover .icon-box{transform:rotateY(180deg) scale(1.1)}
-.icon-box.mint{background:var(--mint);color:var(--teal); border:1px solid #99f6e0}
-.section-title{font-weight:800;color:var(--dark); letter-spacing:-0.5px}
-.form-control{border-radius:14px;border:1px solid #ccfbf1;padding:12px 18px; transition:all .3s}
-.form-control:focus{border-color:var(--teal2);box-shadow:0 0 0 4px var(--mint2); transform:translateY(-1px)}
-.float-orb{position:absolute; border-radius:50%; pointer-events:none !important; z-index:1}
-.orb1{width:260px;height:260px;background:radial-gradient(circle, rgba(20,184,166,0.18), transparent 70%); animation:floatOrb 7s ease-in-out infinite}
-.orb2{width:320px;height:320px;background:radial-gradient(circle, rgba(204,251,241,0.6), transparent 70%); animation:floatOrb 9s ease-in-out infinite reverse}
-@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.08)}}
-.reveal{opacity:0; transform:translateY(32px); transition:all .9s cubic-bezier(0.4,0,0.2,1)}
-.reveal.active{opacity:1; transform:translateY(0)}
-.shimmer{position:relative; overflow:hidden}
-.shimmer::before{content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); animation:shimmer 3s infinite; pointer-events:none}
-@keyframes shimmer{0%{left:-100%}100%{left:200%}}
-.badge-mint{background:var(--mint);color:var(--teal);border-radius:30px;padding:9px 18px;font-weight:800;animation:pulseBadge 2s infinite}
-@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-</style>
 
 <!-- ORNAMEN ANIMASI -->
 <div class="float-orb orb1" style="top:5%; left:-60px"></div>

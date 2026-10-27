@@ -1,23 +1,6 @@
 <!-- =====================================================
      FOOTER UKS DIGITAL - VERSI DETAIL PANJANG ANIMASI
 ===================================================== -->
-<style>
-:root{ --teal:#0f766e; --teal2:#14b8a6; --mint:#ccfbf1; --mint2:#f0fdfa; --dark:#064e3b; }
-.footer-uks{position:relative; background:linear-gradient(180deg, #064e3b 0%, #042f2e 100%); color:#ccfbf1; overflow:hidden; margin-top:0 !important; border-top:none !important}
-.footer-uks::before{content:''; position:absolute; width:500px; height:500px; background:radial-gradient(circle, rgba(20,184,166,0.15) 0%, transparent 70%); top:-200px; left:-100px; animation:floatFooter 8s ease-in-out infinite}
-.footer-uks::after{content:''; position:absolute; width:400px; height:400px; background:radial-gradient(circle, rgba(45,212,191,0.1) 0%, transparent 70%); bottom:-100px; right:-50px; animation:floatFooter 6s ease-in-out infinite reverse}
-@keyframes floatFooter{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
-.footer-wave{position:absolute; top:-1px; left:0; width:100%; overflow:hidden; line-height:0}
-.footer-wave svg{width:calc(100% + 1.3px); height:70px; display:block}
-.footer-uks a{color:#99f6e0; text-decoration:none !important; transition:.3s}
-.footer-uks a:hover{color:white; transform:translateX(4px)}
-.footer-title{font-weight:800; color:white; letter-spacing:0.5px; margin-bottom:16px; font-size:15px}
-.footer-link{display:flex; align-items:center; padding:7px 0; font-size:13px; color:#99f6e0 !important}
-.footer-link i{width:22px; color:var(--teal2)}
-.badge-mint-footer{background:rgba(204,251,241,0.12); color:#5eead4; border:1px solid rgba(45,184,166,0.2); border-radius:20px; padding:6px 12px; font-size:11px}
-.pulse-dot{width:8px;height:8px;background:#2dd4bf;border-radius:50%;display:inline-block;animation:pulseDot 2s infinite; margin-right:6px}
-@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(45,212,191,0.7)}70%{box-shadow:0 0 0 8px rgba(45,212,191,0)}100%{box-shadow:0 0 0 0 rgba(45,212,191,0)}}
-</style>
 
 <footer class="footer-uks pt-0">
   <!-- WAVE ATAS - SELARAS HERO -->

@@ -58,7 +58,7 @@ if(mysqli_num_rows($q)>0){
 <div class="row mt-4"><div class="col-8"></div><div class="col-4 text-center">Karang Baru, <?= date('d F Y') ?><br>Pembina UKS / Petugas<br><br><br><br><b><u><?= $_SESSION['namauser']??'Buk Ely' ?></u></b><br>NIP. -</div></div>
 
 <div class="no-print text-center mt-4">
-<button onclick="window.print()" class="btn btn-success btn-sm">Cetak / Simpan PDF</button>
+<button onclick="window.print()" class="btn btn-success btn-sm btn-cetak-fix">Cetak / Simpan PDF</button>
 <a href="index.php?halaman=laporanharian&tgl=<?= $tgl ?>" class="btn btn-secondary btn-sm">Kembali</a>
 </div>
 

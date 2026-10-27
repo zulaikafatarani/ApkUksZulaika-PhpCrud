@@ -1,0 +1,563 @@
+/* ============================================================
+   UKS DIGITAL SMKN 1 KARANG BARU - DESIGN SYSTEM TERPUSAT
+   File: assets/css/uks.css
+   Dipakai di SEMUA halaman: home, dashboard, navbar tamu & pengurus,
+   daftarobat, detailobat, kontak, tentang, footer, dll.
+   Ganti warna di sini 1x = semua halaman berubah.
+   MODEL & ANIMASI TETAP SAMA SEPERTI HOME.PHP ASLI
+   ============================================================ */
+/* FIX UKS.CSS - samakan dengan tentang.php asli */
+:root{ --teal:#0f766e; --teal2:#14b8a6; --mint:#ccfbf1; --mint2:#f0fdfa; --dark:#064e3b; --radius:20px; }
+.uk-card{border-radius:var(--radius); border:1px solid #e0f2f1; background:white; box-shadow:0 10px 35px rgba(15,118,110,0.07); transition:all .5s cubic-bezier(0.4,0,0.2,1); position:relative; overflow:hidden; z-index:5}
+.uk-card::after{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(204,251,241,0.5), transparent); transition:0s; pointer-events:none}
+.uk-card:hover::after{left:100%; transition:0.9s}
+.uk-card:hover{transform:translateY(-8px) scale(1.02); box-shadow:0 24px 65px rgba(15,118,110,0.15); border-color:var(--teal2)}
+.icon-box{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--teal),var(--teal2));color:white; transition:all .5s; flex-shrink:0}
+.uk-card:hover .icon-box{transform:rotateY(180deg) scale(1.12)}
+.icon-box.mint{background:var(--mint);color:var(--teal); border:1px solid #99f6e0}
+.section-title{font-weight:800;color:var(--dark); letter-spacing:-0.5px}
+.float-orb{position:absolute; border-radius:50%; pointer-events:none!important; z-index:1}
+.orb1{width:280px;height:280px;background:radial-gradient(circle, rgba(20,184,166,0.18), transparent 70%); animation:floatOrb 7s ease-in-out infinite}
+.orb2{width:360px;height:360px;background:radial-gradient(circle, rgba(204,251,241,0.55), transparent 70%); animation:floatOrb 9s ease-in-out infinite reverse}
+@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-32px) scale(1.08)}}
+.reveal{opacity:0; transform:translateY(32px); transition:all .9s cubic-bezier(0.4,0,0.2,1)}
+.reveal.active{opacity:1; transform:translateY(0)}
+.shimmer{position:relative; overflow:hidden}
+.shimmer::before{content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent); animation:shimmer 3s infinite; pointer-events:none}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+.badge-mint{background:var(--mint);color:var(--teal);border-radius:30px;padding:9px 18px;font-weight:800;animation:pulseBadge 2s infinite}
+@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes popUp{from{opacity:0; transform:translateY(30px) scale(0.95)}to{opacity:1; transform:translateY(0) scale(1)}}
+
+
+
+body{background:#f8fafc; font-family:'Plus Jakarta Sans', sans-serif; overflow-x:hidden}
+/* ---------- CARD UTAMA ---------- */
+.uk-card{border-radius:var(--radius); border:1px solid #e0f2f1; background:#fff; box-shadow:var(--shadow); transition:all .55s cubic-bezier(0.4,0,0.2,1); position:relative; z-index:2; overflow:hidden}
+.uk-card:hover{transform:translateY(-10px) scale(1.02) rotateX(2deg); box-shadow:0 26px 70px rgba(15,118,110,0.18); border-color:var(--teal2)}
+.uk-card::after{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(204,251,241,0.5), transparent); pointer-events:none; z-index:3}
+.uk-card:hover::after{left:100%; transition:0.9s}
+.icon-box{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center; transition:all .6s; flex-shrink:0}
+.uk-card:hover .icon-box{transform:rotateY(180deg) scale(1.1)}
+.section-title{font-weight:800; color:var(--dark); letter-spacing:-0.5px}
+.badge-mint{background:var(--mint);color:var(--teal);border-radius:30px;padding:9px 18px;font-weight:800;letter-spacing:0.6px;box-shadow:0 4px 15px rgba(20,184,166,0.2);animation:pulseBadge 2s infinite}
+@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.badge-kritis{background:#fee2e2;color:#dc2626;border-radius:20px;padding:5px 10px;font-weight:700;font-size:11px;border:1px solid #fecaca;animation:shakeKritis .5s infinite}
+@keyframes shakeKritis{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-3px)}20%,40%,60%,80%{transform:translateX(3px)}}
+@keyframes glowRed{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.5), 0 8px 30px rgba(220,38,38,0.15)}50%{box-shadow:0 0 0 16px rgba(220,38,38,0), 0 12px 40px rgba(220,38,38,0.25)}}
+.kritis-anim{animation:shakeKritis 3s infinite, glowRed 2.2s infinite; border-radius:18px; background:linear-gradient(90deg,#dc2626,#f87171); position:relative; overflow:hidden}
+
+/* ---------- ORNAMEN / ANIMASI GLOBAL ---------- */
+.float-orb{position:absolute; border-radius:50%; pointer-events:none!important; z-index:1; filter:blur(0.5px); background:radial-gradient(circle, rgba(20,184,166,0.12), transparent 70%); animation:floatOrb 8s ease-in-out infinite}
+.orb1{width:220px;height:220px;background:radial-gradient(circle, rgba(20,184,166,0.22), transparent 70%); animation:floatOrb 7s ease-in-out infinite}
+.orb2{width:320px;height:320px;background:radial-gradient(circle, rgba(204,251,241,0.6), transparent 70%); animation:floatOrb 9s ease-in-out infinite reverse}
+.orb3{width:160px;height:160px;background:radial-gradient(circle, rgba(45,212,191,0.18), transparent 70%); animation:floatOrb 6s ease-in-out infinite; animation-delay:1s}
+@keyframes floatOrb{0%,100%{transform:translateY(0) translateX(0) scale(1)}33%{transform:translateY(-30px) translateX(15px) scale(1.08)}66%{transform:translateY(-10px) translateX(-10px) scale(0.95)}}
+.float-icon{position:absolute; font-size:22px; opacity:0.08; animation:floatIcon 8s ease-in-out infinite; pointer-events:none!important; color:var(--teal); z-index:1!important}
+@keyframes floatIcon{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-40px) rotate(15deg)}}
+.dots-grid{position:absolute; inset:0; background-image:radial-gradient(#ccfbf1 1.5px, transparent 1.5px); background-size:22px 22px; opacity:0.4; animation:dotsMove 20s linear infinite; pointer-events:none!important; z-index:1!important}
+@keyframes dotsMove{0%{background-position:0 0}100%{background-position:44px 44px}}
+.reveal{opacity:0; transform:translateY(36px); transition:all .95s cubic-bezier(0.4,0,0.2,1)}
+.reveal.active{opacity:1; transform:translateY(0)}
+.shimmer{position:relative; overflow:hidden}
+.shimmer::before{content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); animation:shimmer 3s infinite; pointer-events:none; z-index:4}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+.pulse-btn{animation:pulseBtn 2s infinite}
+@keyframes pulseBtn{0%,100%{box-shadow:0 0 0 0 rgba(20,184,166,.35)}50%{box-shadow:0 0 0 8px rgba(20,184,166,0)}}
+
+/* ---------- NAVBAR TAMU & PENGURUS ---------- */
+.navbar-guest,.navbar-pengurus{background:rgba(255,255,255,0.94)!important; backdrop-filter:blur(12px); border-bottom:1px solid #ccfbf1; box-shadow:0 8px 30px rgba(15,118,110,0.07); position:sticky; top:0; z-index:1038}
+.topbar-guest{background:linear-gradient(90deg,#0f766e,#14b8a6); color:#fff; font-size:16px; font-weight:800; text-transform:uppercase; letter-spacing:.5px; padding:10px 0; animation:gradMove 8s infinite}
+@keyframes gradMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.nav-link-guest,.nav-link-pengurus{color:var(--dark)!important; font-weight:600; font-size:13px; border-radius:30px; padding:8px 16px!important; transition:all .35s; position:relative; z-index:20; pointer-events:auto}
+.nav-link-guest:hover,.nav-link-pengurus:hover{background:var(--mint2); color:var(--teal)!important; transform:translateY(-1px)}
+.nav-link-guest::after{content:''; position:absolute; bottom:4px; left:50%; transform:translateX(-50%); width:0; height:2px; background:var(--teal); transition:width .35s; border-radius:2px}
+.nav-link-guest:hover::after{width:60%}
+.rekap-dropdown{position:relative; margin:0 4px}
+.rekap-dropdown > a.nav-link{color:var(--dark)!important; font-weight:600; font-size:13px; border-radius:30px; padding:8px 16px!important; transition:all .35s; border:1px solid transparent; position:relative; z-index:20; pointer-events:auto; display:flex; align-items:center}
+.rekap-dropdown > a.nav-link:hover{background:var(--mint2); color:var(--teal)!important; transform:translateY(-1px); border-color:#ccfbf1}
+.rekap-dropdown .dropdown-menu{display:none; position:absolute; top:100%; left:0; z-index:1060; min-width:230px; border-radius:14px; border:1px solid #e0f2f1; box-shadow:0 18px 50px rgba(15,118,110,0.18); padding:8px; background:#fff; margin-top:6px}
+.rekap-dropdown:hover .dropdown-menu{display:block; animation:dropIn .35s cubic-bezier(0.4,0,0.2,1) both}
+.rekap-dropdown .dropdown-item{border-radius:10px; padding:11px 14px; font-size:13px; font-weight:500; transition:all .3s; color:var(--dark); margin:3px 0; position:relative; z-index:20; pointer-events:auto}
+.rekap-dropdown .dropdown-item:hover{background:var(--mint2); color:var(--teal); transform:translateX(5px)}
+@keyframes dropIn{from{opacity:0; transform:translateY(10px) scale(0.96)}to{opacity:1; transform:translateY(0) scale(1)}}
+.user-menu .nav-link{background:var(--mint2); border:1px solid #ccfbf1; border-radius:30px; padding:6px 14px 6px 6px!important; transition:all .35s; position:relative; z-index:20; pointer-events:auto}
+.user-menu .nav-link:hover{background:#fff; border-color:var(--teal2); box-shadow:0 6px 18px rgba(15,118,110,0.12); transform:translateY(-1px)}
+.user-image{border:2px solid #5eead4!important; transition:all .4s}
+.user-menu:hover .user-image{transform:scale(1.08) rotate(3deg); border-color:var(--teal)!important}
+
+/* ---------- DASHBOARD ---------- */
+.stat-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px; transition:all .6s}
+.small-box-toska{border-radius:var(--radius); border:1px solid transparent; position:relative; overflow:hidden; transition:all .5s cubic-bezier(0.4,0,0.2,1); z-index:2}
+.small-box-toska:hover{transform:translateY(-5px) scale(1.02); box-shadow:0 18px 50px rgba(0,0,0,0.12)}
+.btn-app-toska{border-radius:14px; border:1px solid #e0f2f1; background:#fff; padding:16px 8px; transition:all .4s; position:relative; z-index:2; width:100%}
+.btn-app-toska:hover{transform:translateY(-4px) scale(1.03); border-color:var(--teal2); box-shadow:0 12px 30px rgba(15,118,110,0.12); background:var(--mint2)}
+.btn-app-toska i{font-size:22px; margin-bottom:6px; display:block; transition:all .4s}
+.btn-app-toska:hover i{transform:rotateY(180deg) scale(1.2)}
+
+/* ---------- HOME KHUSUS - PINDAH KE SINI BIAR HOME BERSIH ---------- */
+#heroFoto{position:relative; overflow:hidden; background:var(--dark); height:84vh; min-height:640px}
+#heroFoto .carousel-item{height:84vh; min-height:640px}
+#heroFoto .elegant-img{width:100%; height:100%; object-fit:cover; object-position:right center; animation:slowZoom 22s ease-in-out infinite alternate}
+@keyframes slowZoom{0%{transform:scale(1)}100%{transform:scale(1.24) translateX(-32px)}}
+#heroFoto .overlay-foto{position:absolute; inset:0; background:linear-gradient(90deg, rgba(6,78,59,0.98) 0%, rgba(15,118,110,0.74) 42%, rgba(15,118,110,0.12) 100%); pointer-events:none; z-index:2}
+#heroFoto .caption-foto{position:absolute; top:50%; left:6%; transform:translateY(-50%); z-index:4; color:white; max-width:680px}
+#heroFoto .carousel-indicators{bottom:38px; z-index:6}
+#heroFoto .carousel-indicators li{width:12px;height:12px;border-radius:5px;background:rgba(255,255,255,0.35);border:none;margin:0 5px;transition:all .45s}
+#heroFoto .carousel-indicators li.active{width:44px;background:var(--teal2);box-shadow:0 0 12px rgba(20,184,166,0.6)}
+.stat-foto{background:white; border-radius:20px; padding:26px; border:1px solid #e0f2f1; box-shadow:0 12px 44px rgba(15,118,110,0.08); transition:all .5s; animation:popUp .9s both; position:relative; overflow:hidden; z-index:5!important; pointer-events:auto}
+@keyframes popUp{from{opacity:0; transform:translateY(50px) scale(0.9)}to{opacity:1; transform:translateY(0) scale(1)}}
+.stat-foto:hover{transform:translateY(-12px) scale(1.04); box-shadow:0 28px 70px rgba(15,118,110,0.2)}
+.icon-mint{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .5s}
+.stat-foto:hover .icon-mint{transform:rotateY(180deg) scale(1.15)}
+.program-card{position:relative; border-radius:22px; overflow:hidden; height:280px; background:var(--dark); cursor:pointer; z-index:5!important}
+.program-card img{width:100%; height:100%; object-fit:cover; transition:transform .8s}
+.program-card:hover img{transform:scale(1.2) rotate(1.5deg)}
+.program-overlay{position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,78,59,0.97) 0%, rgba(6,78,59,0.18) 68%); padding:22px; display:flex; flex-direction:column; justify-content:flex-end; color:white; pointer-events:none; z-index:3}
+.marquee{overflow:hidden; white-space:nowrap; background:var(--dark); padding:13px 0; border-top:1px solid rgba(204,251,241,0.1); border-bottom:1px solid rgba(204,251,241,0.1); position:relative; z-index:8; pointer-events:none}
+.marquee-track{display:inline-flex; animation:marquee 32s linear infinite; pointer-events:auto}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.cta-glow{position:relative; background:linear-gradient(135deg,var(--dark),var(--teal)); border-radius:26px; overflow:hidden}
+.cta-glow::before{content:''; position:absolute; width:420px; height:420px; background:radial-gradient(circle, rgba(45,212,191,0.38), transparent 70%); top:-130px; right:-90px; animation:float 6s ease-in-out infinite; pointer-events:none}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-26px)}}
+
+
+
+/* ---------- ANTI KETUTUP / ANTI POTONG - WAJIB PALING BAWAH ---------- */
+.stat-foto a, .uk-card a, .cta-glow a{position:relative!important; z-index:20!important; pointer-events:auto!important; cursor:pointer!important}
+#heroFoto .carousel-control-prev,#heroFoto .carousel-control-next{position:absolute!important; top:0!important; bottom:0!important; width:8%!important; z-index:25!important; pointer-events:auto!important; opacity:1!important; display:flex!important; align-items:center!important; justify-content:center!important}
+#heroFoto .ctrl{width:54px!important; height:54px!important; background:rgba(15,118,110,0.88)!important; border-radius:50%!important; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.25)!important; box-shadow:0 8px 24px rgba(0,0,0,0.3)!important; display:flex!important; align-items:center!important; justify-content:center; cursor:pointer!important; transition:all .3s!important}
+#heroFoto .ctrl:hover{transform:scale(1.18)!important; background:var(--teal)!important}
+.main-header, .main-footer, .content-wrapper{position:relative}
+.content-wrapper{overflow:visible!important}
+.carousel-control-prev,.carousel-control-next{z-index:20!important; pointer-events:auto!important}
+.uk-card .img-wrap-inner{overflow:hidden; border-radius:var(--radius2)}
+
+/* TAMBAHAN UKS.CSS UNTUK DETAILKATEGORI + DAFTARKATEGORI + CEKRIWAYAT - PASTE DI BAWAH UKS.CSS */
+.img-wrap{border-radius:var(--radius) var(--radius) 0 0; position:relative; background:linear-gradient(180deg, var(--mint2), white)}
+.img-wrap-inner{border-radius:var(--radius) var(--radius) 0 0; overflow:hidden; height:100%; width:100%; display:flex; align-items:center; justify-content:center; padding:52px 16px 18px 16px}
+.breadcrumb-teal{border-radius:30px;padding:10px 18px;background:white;display:inline-flex;align-items:center;font-size:13px;border:1px solid #ccfbf1;box-shadow:0 4px 15px rgba(15,118,110,0.06); position:relative; z-index:10}
+.breadcrumb-teal a{color:var(--teal);font-weight:800;text-decoration:none!important; position:relative; z-index:20; pointer-events:auto}
+.icon-box.mint{background:var(--mint);color:var(--teal); border:1px solid #99f6e0}
+.icon-box.empty{background:#f1f5f9;color:#94a3b8}
+.form-control{border-radius:14px;border:1px solid #ccfbf1;padding:12px 18px; transition:all .3s}
+.form-control:focus{border-color:var(--teal2);box-shadow:0 0 0 4px var(--mint2); transform:translateY(-1px)}
+
+/* TAMBAHAN UKS.CSS UNTUK DETAILOBAT + DAFTAROBAT + DAFTARISI - PASTE DI BAWAH UKS.CSS */
+.filter-btn{border-radius:30px;padding:10px 20px;font-size:13px;font-weight:800;border:1px solid #ccfbf1;background:white;color:var(--teal);transition:all .35s;display:inline-block;margin:5px; position:relative; z-index:20; pointer-events:auto; cursor:pointer; text-decoration:none!important}
+.filter-btn:hover{transform:translateY(-3px) scale(1.05); box-shadow:0 8px 20px rgba(15,118,110,0.12); border-color:var(--teal2)}
+.filter-btn.active{background:linear-gradient(90deg,var(--teal),var(--teal2));color:white;border-color:var(--teal); box-shadow:0 8px 20px rgba(15,118,110,0.25); transform:scale(1.08)}
+.sitemap-link{display:flex;align-items:center;padding:14px 18px;border-radius:14px;text-decoration:none!important;color:var(--dark);transition:all .35s;border:1px solid transparent; position:relative; overflow:hidden; z-index:5; pointer-events:auto}
+.sitemap-link::before{content:''; position:absolute; inset:0; background:linear-gradient(90deg, var(--mint2), white); opacity:0; transition:.35s; z-index:-1}
+.sitemap-link:hover::before{opacity:1}
+.sitemap-link:hover{background:var(--mint2);border-color:var(--teal2);color:var(--teal);transform:translateX(8px) scale(1.02); box-shadow:0 8px 25px rgba(15,118,110,0.12)}
+.sitemap-link:hover b{color:var(--teal)}
+@keyframes shakeKritis{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-4px)}20%,40%,60%,80%{transform:translateX(4px)}}
+@keyframes glowRed{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.45)}50%{box-shadow:0 0 0 14px rgba(220,38,38,0)}}
+@keyframes popUp{from{opacity:0; transform:translateY(20px) scale(0.95)}to{opacity:1; transform:translateY(0) scale(1)}}
+
+/* TAMBAHAN UKS.CSS UNTUK NAVBAR + FOOTER TAMU + LOGINUSER */
+.topbar-uks{background:linear-gradient(90deg,var(--dark),var(--teal),var(--teal2)); background-size:200% 100%; color:white; padding:10px 0; position:relative; overflow:hidden; animation:gradMove 8s ease infinite}
+@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.topbar-uks::before{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); animation:shine 4s infinite}
+@keyframes shine{0%{left:-100%}100%{left:100%}}
+@keyframes slideLeft{0%{transform:translateX(0)}100%{transform:translateX(-10px)}}
+.navbar-uks{ min-height:72px; background:rgba(255,255,255,0.95) !important; backdrop-filter:blur(12px); border-bottom:1px solid #e0f2f1; transition:all .4s; position:sticky; top:0; z-index:1030}
+.navbar-uks.scrolled{box-shadow:0 10px 40px rgba(15,118,110,0.1); min-height:64px}
+.navbar-uks .navbar-brand{font-weight:800; letter-spacing:-0.5px; transition:.3s}
+.navbar-uks .navbar-brand:hover{transform:scale(1.05)}
+.navbar-uks .navbar-brand img{transition:transform .6s}
+.navbar-uks .navbar-brand:hover img{transform:rotate(15deg) scale(1.1)}
+.navbar-uks .nav-link{position:relative; font-weight:600; font-size:14px; color:#475569 !important; padding:8px 14px !important; margin:0 2px; border-radius:30px; transition:all .3s}
+.navbar-uks .nav-link::after{content:''; position:absolute; bottom:2px; left:50%; width:0; height:2.5px; background:linear-gradient(90deg,var(--teal),var(--teal2)); border-radius:2px; transition:all .3s; transform:translateX(-50%)}
+.navbar-uks .nav-link:hover::after, .navbar-uks .nav-link.active::after{width:60%}
+.navbar-uks .nav-link:hover{color:var(--teal) !important; background:var(--mint2)}
+.navbar-uks .nav-link.active{background:var(--mint); color:var(--teal) !important; font-weight:800}
+.pulse-btn{position:relative; overflow:hidden; animation:pulseBtn 2.5s infinite}
+@keyframes pulseBtn{0%{box-shadow:0 0 0 0 rgba(220,38,38,0.4)}70%{box-shadow:0 0 0 12px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+#heroCarousel .carousel-item{height:62vh; min-height:420px; background-size:cover; background-position:center top}
+#heroCarousel .overlay{background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.40) 100%);}
+.footer-uks{position:relative; background:linear-gradient(180deg, #064e3b 0%, #042f2e 100%); color:#ccfbf1; overflow:hidden; margin-top:0 !important; border-top:none !important}
+.footer-uks::before{content:''; position:absolute; width:500px; height:500px; background:radial-gradient(circle, rgba(20,184,166,0.15) 0%, transparent 70%); top:-200px; left:-100px; animation:floatFooter 8s ease-in-out infinite}
+.footer-uks::after{content:''; position:absolute; width:400px; height:400px; background:radial-gradient(circle, rgba(45,212,191,0.1) 0%, transparent 70%); bottom:-100px; right:-50px; animation:floatFooter 6s ease-in-out infinite reverse}
+@keyframes floatFooter{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+.footer-wave{position:absolute; top:-1px; left:0; width:100%; overflow:hidden; line-height:0}
+.footer-wave svg{width:calc(100% + 1.3px); height:70px; display:block}
+.footer-uks a{color:#99f6e0; text-decoration:none !important; transition:.3s}
+.footer-uks a:hover{color:white; transform:translateX(4px)}
+.footer-title{font-weight:800; color:white; letter-spacing:0.5px; margin-bottom:16px; font-size:15px}
+.footer-link{display:flex; align-items:center; padding:7px 0; font-size:13px; color:#99f6e0 !important}
+.footer-link i{width:22px; color:var(--teal2)}
+.badge-mint-footer{background:rgba(204,251,241,0.12); color:#5eead4; border:1px solid rgba(45,184,166,0.2); border-radius:20px; padding:6px 12px; font-size:11px}
+.pulse-dot{width:8px;height:8px;background:#2dd4bf;border-radius:50%;display:inline-block;animation:pulseDot 2s infinite; margin-right:6px}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(45,212,191,0.7)}70%{box-shadow:0 0 0 8px rgba(45,212,191,0)}100%{box-shadow:0 0 0 0 rgba(45,212,191,0)}}
+
+/* TAMBAHAN UKS.CSS UNTUK DASHBOARD INTERNAL - PASTE DI BAWAH UKS.CSS */
+.dash .uk-card{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); transition:all .55s cubic-bezier(0.4,0,0.2,1); position:relative; z-index:2; overflow:hidden}
+.dash .uk-card:hover{transform:translateY(-6px) scale(1.01); box-shadow:0 22px 60px rgba(15,118,110,0.15); border-color:var(--teal2)}
+.dash .uk-card::after{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(204,251,241,0.5), transparent); transition:0s; pointer-events:none; z-index:3}
+.dash .uk-card:hover::after{left:100%; transition:0.9s}
+.dash .icon-box{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center; transition:all .6s; flex-shrink:0}
+.dash .uk-card:hover .icon-box{transform:rotateY(180deg) scale(1.1)}
+.dash .float-orb{position:absolute; border-radius:50%; pointer-events:none!important; z-index:1; background:radial-gradient(circle, rgba(20,184,166,0.12), transparent 70%); animation:floatOrb 8s ease-in-out infinite}
+.dash .reveal{opacity:0; transform:translateY(28px); transition:all .85s cubic-bezier(0.4,0,0.2,1)}
+.dash .reveal.active{opacity:1; transform:translateY(0)}
+.dash .badge-mint{background:var(--mint);color:var(--teal);border-radius:30px;padding:6px 12px;font-weight:700;font-size:11px; border:1px solid #99f6e0}
+.dash .stat-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px; transition:all .6s}
+.dash .small-box-toska{border-radius:20px; border:1px solid transparent; position:relative; overflow:hidden; transition:all .5s cubic-bezier(0.4,0,0.2,1); z-index:2}
+.dash .small-box-toska:hover{transform:translateY(-5px) scale(1.02); box-shadow:0 18px 50px rgba(0,0,0,0.12)}
+.dash .btn-app-toska{border-radius:14px; border:1px solid #e0f2f1; background:white; padding:16px 8px; transition:all .4s; position:relative; z-index:2; width:100%; text-decoration:none!important; display:block}
+.dash .btn-app-toska:hover{transform:translateY(-4px) scale(1.03); border-color:var(--teal2); box-shadow:0 12px 30px rgba(15,118,110,0.12); background:var(--mint2)}
+.dash .btn-app-toska i{font-size:22px; margin-bottom:6px; display:block; transition:all .4s}
+.dash .btn-app-toska:hover i{transform:rotateY(180deg) scale(1.2)}
+
+/* TAMBAHAN UKS.CSS - NAVBAR + FOOTER + SIDEBAR INTERNAL - PASTE PALING BAWAH */
+/* NAVBAR INTERNAL */
+.navbar-user{background:rgba(255,255,255,0.94)!important; backdrop-filter:blur(12px); border-bottom:1px solid #ccfbf1; box-shadow:0 8px 30px rgba(15,118,110,0.07); position:sticky; top:0; z-index:1038; transition:all .35s}
+.rekap-dropdown{position:relative; margin:0 4px}
+.rekap-dropdown > a.nav-link{color:var(--dark)!important; font-weight:600; font-size:13px; border-radius:30px; padding:8px 16px!important; transition:all .35s; border:1px solid transparent; position:relative; z-index:20; pointer-events:auto; display:flex; align-items:center}
+.rekap-dropdown > a.nav-link:hover{background:var(--mint2); color:var(--teal)!important; transform:translateY(-1px); border-color:#ccfbf1; box-shadow:0 6px 15px rgba(15,118,110,0.08)}
+.rekap-dropdown .dropdown-menu{display:none; position:absolute; top:100%; left:0; z-index:1060; min-width:230px; border-radius:14px; border:1px solid #e0f2f1; box-shadow:0 18px 50px rgba(15,118,110,0.18); padding:8px; background:white; margin-top:6px}
+.rekap-dropdown:hover .dropdown-menu{display:block; animation:dropIn .35s both}
+.rekap-dropdown .dropdown-item{border-radius:10px; padding:11px 14px; font-size:13px; font-weight:500; transition:all .3s; color:var(--dark); margin:3px 0; position:relative; z-index:20; pointer-events:auto}
+.rekap-dropdown .dropdown-item:hover{background:var(--mint2); color:var(--teal); transform:translateX(5px)}
+@keyframes dropIn{from{opacity:0; transform:translateY(10px) scale(0.96)}to{opacity:1; transform:translateY(0) scale(1)}}
+.nav-link-pengurus{color:var(--dark)!important; font-weight:600; font-size:13px; border-radius:30px; padding:8px 16px!important; transition:all .35s; border:1px solid transparent; position:relative; z-index:20; pointer-events:auto; margin:0 3px}
+.nav-link-pengurus:hover{background:var(--mint2); color:var(--teal)!important; transform:translateY(-1px); border-color:#ccfbf1; box-shadow:0 6px 15px rgba(15,118,110,0.08)}
+.nav-link-pengurus.active{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white!important; box-shadow:0 8px 20px rgba(15,118,110,0.25)}
+.user-menu .nav-link{background:var(--mint2); border:1px solid #ccfbf1; border-radius:30px; padding:6px 14px 6px 6px!important; transition:all .35s; position:relative; z-index:20; pointer-events:auto}
+.user-menu .nav-link:hover{background:white; border-color:var(--teal2); box-shadow:0 6px 18px rgba(15,118,110,0.12); transform:translateY(-1px)}
+.user-image{border:2px solid #5eead4!important; transition:all .4s}
+.user-menu:hover .user-image{transform:scale(1.08) rotate(3deg); border-color:var(--teal)!important}
+.float-orb-nav{position:absolute; border-radius:50%; pointer-events:none!important; z-index:1; background:radial-gradient(circle, rgba(20,184,166,0.08), transparent 70%); animation:floatOrb 8s ease-in-out infinite}
+/* FOOTER INTERNAL */
+.main-footer-user{background:linear-gradient(180deg,white 0%,var(--mint2) 100%); border-top:1px solid #ccfbf1; padding:0; position:relative; z-index:1030; margin-left:250px!important; width:calc(100% - 250px)!important; transition:all .35s!important; margin-top:0!important}
+body.sidebar-collapse .main-footer-user, body.sidebar-closed .main-footer-user{margin-left:0!important; width:100%!important}
+@media(max-width:991px){.main-footer-user{margin-left:0!important; width:100%!important}}
+.main-footer-user::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at top left, rgba(20,184,166,0.06), transparent 50%), radial-gradient(circle at bottom right, rgba(204,251,241,0.5), transparent 60%); pointer-events:none; z-index:1}
+.footer-card{background:white; border:1px solid #e0f2f1; border-radius:20px; box-shadow:0 10px 35px rgba(15,118,110,0.07); transition:all .5s; position:relative; overflow:hidden; z-index:2}
+.footer-card:hover{transform:translateY(-4px); box-shadow:0 18px 50px rgba(15,118,110,0.12); border-color:var(--teal2)}
+.footer-card::after{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(204,251,241,0.5), transparent); transition:0s; pointer-events:none; z-index:3}
+.footer-card:hover::after{left:100%; transition:0.9s}
+.footer-card .icon-box{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--teal),var(--teal2));color:white; transition:all .5s}
+.footer-card:hover .icon-box{transform:rotateY(180deg) scale(1.1)}
+.float-orb-footer{position:absolute; border-radius:50%; pointer-events:none!important; z-index:1; background:radial-gradient(circle, rgba(20,184,166,0.1), transparent 70%); animation:floatOrb 8s ease-in-out infinite}
+.link-footer{color:#64748b; font-size:13px; font-weight:500; transition:all .3s; text-decoration:none!important; position:relative; z-index:20; pointer-events:auto; display:inline-flex; align-items:center; padding:4px 10px; border-radius:20px; margin:2px}
+.link-footer:hover{color:var(--teal); background:var(--mint2); transform:translateY(-1px)}
+/* SIDEBAR - SATU STYLE UNTUK 3 ROLE */
+.main-sidebar{background:linear-gradient(180deg,#064e3b 0%,#0f766e 50%,#0f766e 100%)!important; border-right:1px solid #134e4a!important; box-shadow:4px 0 30px rgba(6,78,59,0.25)!important; overflow:visible!important}
+.main-sidebar::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at top right, rgba(20,184,166,0.18), transparent 60%), radial-gradient(circle at bottom left, rgba(204,251,241,0.1), transparent 50%); pointer-events:none; z-index:0}
+.brand-link{background:linear-gradient(90deg,#064e3b,#0f766e)!important; border-bottom:1px solid rgba(204,251,241,0.15)!important; position:relative; overflow:hidden; z-index:2}
+.brand-link::after{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); animation:shimmer 4s infinite; pointer-events:none}
+.brand-text{letter-spacing:1.2px; font-weight:800!important; color:#ccfbf1!important}
+.user-panel{border-bottom:1px solid rgba(204,251,241,0.12)!important; position:relative; z-index:2}
+.user-panel img{border:2px solid #5eead4!important; box-shadow:0 0 0 3px rgba(20,184,166,0.25); transition:all .5s}
+.user-panel:hover img{transform:scale(1.08) rotate(3deg); border-color:#ccfbf1!important}
+.nav-header{color:#5eead4!important; font-size:11px!important; letter-spacing:1.5px!important; margin-top:18px!important; font-weight:800!important; position:relative; z-index:2}
+.nav-sidebar .nav-link{border-radius:12px!important; margin:3px 10px!important; color:#a7f3d0!important; transition:all .35s!important; position:relative; overflow:hidden; z-index:2; border:1px solid transparent; font-size:14px}
+.nav-sidebar .nav-link::before{content:''; position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,0.08), rgba(204,251,241,0.08)); opacity:0; transition:.35s; z-index:-1}
+.nav-sidebar .nav-link:hover::before{opacity:1}
+.nav-sidebar .nav-link:hover{background:rgba(204,251,241,0.12)!important; color:#f0fdfa!important; transform:translateX(6px); border-color:rgba(94,234,212,0.25); box-shadow:0 6px 20px rgba(0,0,0,0.15)}
+.nav-sidebar .nav-link.active{background:linear-gradient(90deg,var(--teal2),var(--teal))!important; color:white!important; box-shadow:0 8px 25px rgba(20,184,166,0.35)!important; border-color:#5eead4!important; transform:translateX(4px) scale(1.02); font-weight:700}
+.nav-sidebar .nav-link.active .nav-icon{color:white!important; transform:scale(1.15)}
+.nav-sidebar .nav-icon{transition:all .4s; color:#5eead4!important; width:22px!important; text-align:center; margin-right:8px!important}
+.nav-sidebar .nav-link:hover .nav-icon{transform:rotateY(180deg) scale(1.2); color:#ccfbf1!important}
+.float-orb-sidebar{position:absolute; border-radius:50%; pointer-events:none; z-index:1; background:radial-gradient(circle, rgba(20,184,166,0.12), transparent 70%); animation:floatOrb 8s ease-in-out infinite}
+
+
+/* TAMBAHAN UKS.CSS - MASTER USER (index/show/create/edit) - PASTE PALING BAWAH */
+.dash .table-uks thead{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white}
+.dash .table-uks thead th{border:none; font-size:13px; letter-spacing:.3px; padding:12px 10px; vertical-align:middle}
+.dash .table-uks tbody tr{transition:all .3s}
+.dash .table-uks tbody tr:hover{background:var(--mint2)!important}
+.dash .table-uks td{vertical-align:middle; font-size:13px; padding:10px}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:10px 14px; transition:all .3s}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12)}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white; border-radius:30px; font-weight:700; padding:8px 20px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.2); transition:all .35s}
+.dash .btn-toska:hover{transform:translateY(-2px); box-shadow:0 10px 25px rgba(15,118,110,0.25); color:white}
+.dash .btn-pill{border-radius:30px; font-weight:700; padding:6px 14px; transition:all .3s}
+.dash .btn-pill:hover{transform:translateY(-2px)}
+.dash .badge-role{border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px; text-transform:uppercase}
+.dash .badge-admin{background:#fee2e2; color:#dc2626; border:1px solid #fecaca}
+.dash .badge-petugas{background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd}
+.dash .badge-anggota{background:#fef9c3; color:#a16207; border:1px solid #fde68a}
+.dash .foto-user{width:45px;height:45px;object-fit:cover;border-radius:50%;border:2px solid #5eead4; transition:all .4s}
+.dash .foto-user:hover{transform:scale(1.12) rotate(3deg)}
+.dash .foto-big{width:130px;height:130px;object-fit:cover;border-radius:50%;border:3px solid #5eead4; box-shadow:0 0 0 4px var(--mint2); transition:all .5s}
+.dash .foto-big:hover{transform:scale(1.06) rotate(2deg)}
+.dash .alert-toska{border-radius:14px; border:1px solid #a7f3d0; background:#ecfdf5; color:#065f46}
+
+/* ============================================================
+   TAMBAHAN UKS.CSS - MASTER SISWA - GABUNG SATU FILE UKS.CSS
+   Model SAMA PERSIS kayak MASTER USER di atas (.dash .table-uks)
+   Jangan bikin file uks_siswa.css lagi - hapus file itu!
+   ============================================================ */
+.dash .table-uks thead{ background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white; }
+.dash .table-uks thead th{ border:none; font-size:15px; font-weight:700; padding:16px 12px; vertical-align:middle; }
+.dash .table-uks tbody td{ vertical-align:middle; font-size:14px; padding:14px 12px; border-top:1px solid #f0fdfa; }
+.dash .table-uks tbody tr{ transition:all .3s; }
+.dash .table-uks tbody tr:hover{ background:var(--mint2) !important; }
+.dash .foto-siswa{ width:45px !important; height:45px !important; object-fit:cover; border-radius:50%; border:2px solid #5eead4; display:block; }
+.dash .foto-siswa:hover{ transform:scale(1.12) rotate(3deg); }
+.dash .foto-big-siswa{ width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #5eead4; box-shadow:0 0 0 4px var(--mint2); }
+.dash .badge-kelas{ background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px; }
+.dash .badge-alergi{ background:#fee2e2; color:#dc2626; border:1px solid #fecaca; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px; }
+.dash .btn-aksi{ width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none !important; margin:0 3px; font-size:15px; transition:all .3s; }
+.dash .btn-aksi:hover{ transform:translateY(-2px) scale(1.05); }
+.dash .btn-lihat{ background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; }
+.dash .btn-edit{ background:linear-gradient(90deg,#0369a1,#38bdf8); color:white !important; }
+.dash .btn-hapus{ background:#fee2e2; color:#dc2626 !important; border:1px solid #fecaca; }
+.dash .content-header{ opacity:1 !important; transform:none !important; }
+
+/* ============================================================
+   PENANGANAN - GABUNG 1 UKS.CSS - SAMA KAYAK SISWA & USER
+   Paste di PALING BAWAH uks.css - Hapus <style> di file penanganan!
+   ============================================================ */
+.dash .uk-card-pen{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; position:relative; z-index:2; animation:popUpPen .7s cubic-bezier(0.4,0,0.2,1) both}
+@keyframes popUpPen{from{opacity:0; transform:translateY(30px) scale(0.96)}to{opacity:1; transform:translateY(0) scale(1)}}
+.dash .header-pen{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:#f0fdfa; border-bottom:1px solid #e0f2f1}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; border-radius:30px; font-weight:700; padding:10px 22px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.25); display:inline-flex; align-items:center; text-decoration:none !important; animation:pulsePen 2.5s infinite}
+@keyframes pulsePen{0%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0.35)}70%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0)}}
+.dash .btn-toska:hover{animation:none; transform:translateY(-3px) scale(1.03)}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .table-pen{width:100%; margin-bottom:0}
+.dash .table-pen thead{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white}
+.dash .table-pen thead th{border:none; padding:16px 12px; font-size:15px; font-weight:700; color:white}
+.dash .table-pen tbody td{vertical-align:middle; padding:14px 12px; font-size:14px}
+.dash .table-pen tbody tr{animation:rowPen .5s both}
+.dash .table-pen tbody tr:nth-child(2){animation-delay:.15s}
+.dash .table-pen tbody tr:nth-child(3){animation-delay:.3s}
+@keyframes rowPen{from{opacity:0; transform:translateX(-15px)}to{opacity:1; transform:translateX(0)}}
+.dash .table-pen tbody tr:hover{background:var(--mint2) !important}
+.dash .badge-sembuh{background:#dcfce7; color:#166534; border:1px solid #bbf7d0; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px}
+.dash .badge-rujuk{background:#fee2e2; color:#dc2626; border:1px solid #fecaca; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px}
+.dash .badge-istirahat{background:#fef9c3; color:#a16207; border:1px solid #fde68a; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px}
+.dash .btn-aksi{width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none !important; margin:0 3px; font-size:15px; transition:all .4s}
+.dash .btn-aksi:hover{transform:translateY(-3px) rotate(-5deg) scale(1.1)}
+.dash .btn-lihat{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important}
+.dash .btn-edit{background:linear-gradient(90deg,#0369a1,#38bdf8); color:white !important}
+.dash .btn-hapus{background:#fee2e2; color:#dc2626 !important; border:1px solid #fecaca}
+.dash .foto-pen{width:42px; height:42px; object-fit:cover; border-radius:50%; border:2px solid #5eead4; transition:all .5s}
+.dash .foto-pen:hover{transform:scale(1.18) rotate(5deg)}
+.dash .foto-big-pen{width:100px; height:100px; object-fit:cover; border-radius:50%; border:3px solid #5eead4; box-shadow:0 0 0 4px var(--mint2); animation:floatPen 4s ease-in-out infinite}
+@keyframes floatPen{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.dash .foto-obat{width:35px; height:35px; object-fit:cover; border-radius:10px; border:1px solid #ccfbf1}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:10px 14px; transition:all .35s}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12); transform:translateY(-1px)}
+.dash .item-obat{animation:rowPen .5s both}
+.dash .content-header{opacity:1 !important; transform:none !important}
+
+/* ============================================================
+   LAPORAN - GABUNG 1 UKS.CSS - SAMA KAYAK SISWA & PENANGANAN
+   Paste di PALING BAWAH uks.css - Hapus <style> di file laporan!
+   ============================================================ */
+.dash .uk-card-lap{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; position:relative; z-index:2; animation:popUpLap .7s cubic-bezier(0.4,0,0.2,1) both}
+@keyframes popUpLap{from{opacity:0; transform:translateY(30px) scale(0.96)}to{opacity:1; transform:translateY(0) scale(1)}}
+.dash .header-lap{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:#f0fdfa; border-bottom:1px solid #e0f2f1}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; border-radius:30px; font-weight:700; padding:8px 20px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.25); display:inline-flex; align-items:center; text-decoration:none !important; animation:pulseLap 2.5s infinite}
+@keyframes pulseLap{0%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0.35)}70%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0)}}
+.dash .btn-cetak{background:linear-gradient(90deg,#dc2626,#f87171) !important; color:white !important; border-radius:30px; font-weight:700; padding:8px 18px; border:none; box-shadow:0 6px 18px rgba(220,38,38,0.25); display:inline-flex; align-items:center; text-decoration:none !important}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .table-lap{width:100%; margin-bottom:0}
+.dash .table-lap thead{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white}
+.dash .table-lap thead th{border:none; padding:14px 12px; font-size:14px; font-weight:700; color:white}
+.dash .table-lap tbody td{vertical-align:middle; padding:12px; font-size:13px}
+.dash .table-lap tbody tr{animation:rowLap .5s both}
+.dash .table-lap tbody tr:nth-child(2){animation-delay:.15s}
+.dash .table-lap tbody tr:nth-child(3){animation-delay:.3s}
+@keyframes rowLap{from{opacity:0; transform:translateX(-15px)}to{opacity:1; transform:translateX(0)}}
+.dash .table-lap tbody tr:hover{background:var(--mint2) !important}
+.dash .badge-sembuh{background:#dcfce7; color:#166534; border:1px solid #bbf7d0; border-radius:20px; padding:5px 10px; font-weight:700; font-size:11px}
+.dash .badge-rujuk{background:#fee2e2; color:#dc2626; border:1px solid #fecaca; border-radius:20px; padding:5px 10px; font-weight:700; font-size:11px}
+.dash .badge-istirahat{background:#fef9c3; color:#a16207; border:1px solid #fde68a; border-radius:20px; padding:5px 10px; font-weight:700; font-size:11px}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:8px 12px; transition:all .35s}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12)}
+.dash .content-header{opacity:1 !important; transform:none !important}
+.dash .stat-lap{animation:popUpLap .7s both}
+.dash .stat-lap:hover{transform:translateY(-4px) scale(1.02); box-shadow:0 18px 50px rgba(15,118,110,0.15)}
+
+/* GANTI DI FILE CETAK - KOP TETAP HITAM RESMI, TOMBOL TOSKA */
+.kop-wrapper{border-bottom:3px double #0f766e !important; padding:8px 0 10px; margin-bottom:15px}
+.kop-tengah{color:#064e3b}
+@media print{.no-print{display:none} @page{margin:10mm}}
+.btn-cetak-fix{background:linear-gradient(90deg,#0f766e,#14b8a6) !important; color:white !important; border-radius:30px; padding:8px 20px; font-weight:700; border:none}
+
+/* ============================================================
+   KATEGORI - GABUNG 1 UKS.CSS - SAMA KAYAK SISWA & PENANGANAN
+   Paste di PALING BAWAH uks.css - Hapus <style> di file kategori!
+   ============================================================ */
+.dash .uk-card-kat{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; position:relative; z-index:2; animation:popUpKat .7s cubic-bezier(0.4,0,0.2,1) both}
+@keyframes popUpKat{from{opacity:0; transform:translateY(30px) scale(0.96)}to{opacity:1; transform:translateY(0) scale(1)}}
+.dash .header-kat{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:#f0fdfa; border-bottom:1px solid #e0f2f1}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; border-radius:30px; font-weight:700; padding:10px 22px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.25); display:inline-flex; align-items:center; text-decoration:none !important; animation:pulseKat 2.5s infinite}
+@keyframes pulseKat{0%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0.35)}70%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0)}}
+.dash .btn-toska:hover{animation:none; transform:translateY(-3px) scale(1.03)}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .table-kat{width:100%; margin-bottom:0}
+.dash .table-kat thead{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white}
+.dash .table-kat thead th{border:none; padding:16px 12px; font-size:15px; font-weight:700; color:white}
+.dash .table-kat tbody td{vertical-align:middle; padding:14px 12px; font-size:14px}
+.dash .table-kat tbody tr{animation:rowKat .5s both}
+.dash .table-kat tbody tr:nth-child(2){animation-delay:.15s}
+.dash .table-kat tbody tr:nth-child(3){animation-delay:.3s}
+@keyframes rowKat{from{opacity:0; transform:translateX(-15px)}to{opacity:1; transform:translateX(0)}}
+.dash .table-kat tbody tr:hover{background:var(--mint2) !important}
+.dash .badge-jml{background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px}
+.dash .btn-aksi{width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none !important; margin:0 3px; font-size:15px; transition:all .4s}
+.dash .btn-aksi:hover{transform:translateY(-3px) rotate(-5deg) scale(1.1)}
+.dash .btn-lihat{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important}
+.dash .btn-edit{background:linear-gradient(90deg,#0369a1,#38bdf8); color:white !important}
+.dash .btn-hapus{background:#fee2e2; color:#dc2626 !important; border:1px solid #fecaca}
+.dash .icon-kat{width:70px; height:70px; border-radius:20px; background:linear-gradient(135deg,var(--teal),var(--teal2)); color:white; display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto 14px; transition:all .5s}
+.dash .uk-card-kat:hover .icon-kat{transform:rotateY(180deg) scale(1.1)}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:10px 14px; transition:all .35s}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12); transform:translateY(-1px)}
+.dash .content-header{opacity:1 !important; transform:none !important}
+
+/* ============================================================
+   GURU - GABUNG 1 UKS.CSS - SAMA KAYAK SISWA & KATEGORI
+   Paste di PALING BAWAH uks.css - Hapus <style> di file guru!
+   ============================================================ */
+.dash .uk-card-guru{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; position:relative; z-index:2; animation:popUpGuru .7s cubic-bezier(0.4,0,0.2,1) both}
+@keyframes popUpGuru{from{opacity:0; transform:translateY(30px) scale(0.96)}to{opacity:1; transform:translateY(0) scale(1)}}
+.dash .header-guru{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:#f0fdfa; border-bottom:1px solid #e0f2f1}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; border-radius:30px; font-weight:700; padding:10px 22px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.25); display:inline-flex; align-items:center; text-decoration:none !important; animation:pulseGuru 2.5s infinite}
+@keyframes pulseGuru{0%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0.35)}70%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0)}}
+.dash .btn-toska:hover{animation:none; transform:translateY(-3px) scale(1.03)}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .table-guru{width:100%; margin-bottom:0}
+.dash .table-guru thead{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white}
+.dash .table-guru thead th{border:none; padding:16px 12px; font-size:15px; font-weight:700; color:white}
+.dash .table-guru tbody td{vertical-align:middle; padding:14px 12px; font-size:14px}
+.dash .table-guru tbody tr{animation:rowGuru .5s both}
+.dash .table-guru tbody tr:nth-child(2){animation-delay:.15s}
+.dash .table-guru tbody tr:nth-child(3){animation-delay:.3s}
+@keyframes rowGuru{from{opacity:0; transform:translateX(-15px)}to{opacity:1; transform:translateX(0)}}
+.dash .table-guru tbody tr:hover{background:var(--mint2) !important}
+.dash .foto-guru{width:45px; height:45px; object-fit:cover; border-radius:50%; border:2px solid #5eead4; transition:all .5s}
+.dash .foto-guru:hover{transform:scale(1.18) rotate(5deg); border-color:var(--teal); box-shadow:0 0 0 4px #ccfbf1}
+.dash .foto-big-guru{width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #5eead4; box-shadow:0 0 0 4px var(--mint2); animation:floatGuru 4s ease-in-out infinite}
+@keyframes floatGuru{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.dash .badge-alergi{background:#fee2e2; color:#dc2626; border:1px solid #fecaca; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px}
+.dash .badge-nip{background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px}
+.dash .btn-aksi{width:42px; height:42px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none !important; margin:0 3px; font-size:15px; transition:all .4s}
+.dash .btn-aksi:hover{transform:translateY(-3px) rotate(-5deg) scale(1.1)}
+.dash .btn-lihat{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important}
+.dash .btn-edit{background:linear-gradient(90deg,#0369a1,#38bdf8); color:white !important}
+.dash .btn-hapus{background:#fee2e2; color:#dc2626 !important; border:1px solid #fecaca}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:10px 14px; transition:all .35s}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12); transform:translateY(-1px)}
+.dash .content-header{opacity:1 !important; transform:none !important}
+
+/* ============================================================
+   FIX AKSI - 1 BARIS SEJAJAR KAYAK SCREENSHOT KEDUA
+   Paste di PALING BAWAH uks.css - Ini nimpa .btn-aksi yang lama!
+   ============================================================ */
+.dash .aksi-wrap{
+  display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important;
+  gap:6px !important; justify-content:center !important; align-items:center !important;
+}
+.dash .btn-aksi{
+  width:52px !important; height:38px !important; min-width:52px !important;
+  border-radius:20px !important; /* PIL MEMANJANG, BUKAN BULAT */
+  display:inline-flex !important; align-items:center !important; justify-content:center !important;
+  text-decoration:none !important; margin:0 !important; font-size:14px !important;
+  transition:all .4s !important; flex-shrink:0 !important;
+}
+.dash .btn-aksi:hover{
+  transform:translateY(-3px) scale(1.08) !important;
+  box-shadow:0 8px 20px rgba(15,118,110,0.2) !important;
+}
+.dash .btn-lihat{background:linear-gradient(90deg,var(--teal),var(--teal2)) !important; color:white !important}
+.dash .btn-edit{background:linear-gradient(90deg,#0369a1,#38bdf8) !important; color:white !important}
+.dash .btn-hapus{background:#fee2e2 !important; color:#dc2626 !important; border:1px solid #fecaca !important}
+
+/* BIAR KOLOM AKSI GAK SEMPIT & GAK BIKIN TOMBOL TURUN */
+.dash .table-kat th:last-child, .dash .table-guru th:last-child,
+.dash .table-pen th:last-child, .dash .table-lap th:last-child,
+.dash .table-uks th:last-child{
+  min-width:190px !important; white-space:nowrap !important;
+}
+.dash .table-kat td:last-child, .dash .table-guru td:last-child,
+.dash .table-pen td:last-child, .dash .table-lap td:last-child,
+.dash .table-uks td:last-child{
+  white-space:nowrap !important;
+}
+
+
+/* ============================================================
+   BARANG - GABUNG 1 UKS.CSS - SAMA KAYAK SISWA & GURU
+   Paste di PALING BAWAH uks.css - Hapus <style> di file barang!
+   ============================================================ */
+.dash .uk-card-bar{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; position:relative; z-index:2; animation:popUpBar .7s cubic-bezier(0.4,0,0.2,1) both}
+@keyframes popUpBar{from{opacity:0; transform:translateY(30px) scale(0.96)}to{opacity:1; transform:translateY(0) scale(1)}}
+.dash .header-bar{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:#f0fdfa; border-bottom:1px solid #e0f2f1}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; border-radius:30px; font-weight:700; padding:10px 22px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.25); display:inline-flex; align-items:center; text-decoration:none !important; animation:pulseBar 2.5s infinite}
+@keyframes pulseBar{0%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0.35)}70%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0)}}
+.dash .btn-toska:hover{animation:none; transform:translateY(-3px) scale(1.03)}
+.dash .btn-outline-bar{border:1px solid #ccfbf1; color:var(--teal) !important; background:white; border-radius:30px; font-weight:700; padding:8px 18px; display:inline-flex; align-items:center; text-decoration:none !important; transition:all .35s}
+.dash .btn-outline-bar:hover{background:var(--mint2); transform:translateY(-2px)}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .table-bar{width:100%; margin-bottom:0}
+.dash .table-bar thead{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white}
+.dash .table-bar thead th{border:none; padding:16px 12px; font-size:15px; font-weight:700; color:white}
+.dash .table-bar tbody td{vertical-align:middle; padding:14px 12px; font-size:14px}
+.dash .table-bar tbody tr{animation:rowBar .5s both}
+.dash .table-bar tbody tr:nth-child(2){animation-delay:.15s}
+.dash .table-bar tbody tr:nth-child(3){animation-delay:.3s}
+@keyframes rowBar{from{opacity:0; transform:translateX(-15px)}to{opacity:1; transform:translateX(0)}}
+.dash .table-bar tbody tr:hover{background:var(--mint2) !important}
+.dash .table-bar tbody tr.table-danger{background:#fef2f2 !important}
+.dash .table-bar tbody tr.table-warning{background:#fffbeb !important}
+.dash .foto-bar{width:45px; height:45px; object-fit:cover; border-radius:12px; border:1px solid #ccfbf1; transition:all .5s}
+.dash .foto-bar:hover{transform:scale(1.18) rotate(3deg); border-color:var(--teal)}
+.dash .foto-big-bar{max-height:250px; object-fit:cover; border-radius:20px; border:1px solid #e0f2f1; box-shadow:0 12px 40px rgba(15,118,110,0.08); animation:floatBar 4s ease-in-out infinite}
+@keyframes floatBar{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.dash .badge-kat{background:#dcfce7; color:#166534; border:1px solid #bbf7d0; border-radius:20px; padding:6px 12px; font-weight:700; font-size:11px}
+.dash .badge-exp{background:#fee2e2; color:#dc2626; border:1px solid #fecaca; border-radius:20px; padding:5px 10px; font-weight:700; font-size:11px; animation:shakeBar .5s infinite}
+@keyframes shakeBar{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+.dash .badge-kritis{background:#fef9c3; color:#a16207; border:1px solid #fde68a; border-radius:20px; padding:5px 10px; font-weight:700; font-size:11px}
+.dash .badge-aman{background:#dcfce7; color:#166534; border:1px solid #bbf7d0; border-radius:20px; padding:5px 10px; font-weight:700; font-size:11px}
+.dash .aksi-wrap{display:flex; flex-direction:row; flex-wrap:nowrap; gap:6px; justify-content:center; align-items:center}
+.dash .btn-aksi{width:52px; height:38px; min-width:52px; border-radius:20px; display:inline-flex; align-items:center; justify-content:center; text-decoration:none !important; margin:0; font-size:14px; transition:all .4s; flex-shrink:0}
+.dash .btn-aksi:hover{transform:translateY(-3px) scale(1.08)}
+.dash .btn-lihat{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important}
+.dash .btn-edit{background:linear-gradient(90deg,#0369a1,#38bdf8); color:white !important}
+.dash .btn-hapus{background:#fee2e2; color:#dc2626 !important; border:1px solid #fecaca}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:10px 14px; transition:all .35s}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12); transform:translateY(-1px)}
+.dash .content-header{opacity:1 !important; transform:none !important}
+.dash .table-bar th:last-child, .dash .table-bar td:last-child{min-width:190px; white-space:nowrap}
+
+/* ============================================================
+   STOK MENIPIS - ANIMASI PEMBEDA - Paste di PALING BAWAH uks.css
+   Stok 0 = merah goyang + glow, Stok 1-5 = kuning denyut + kedip
+   ============================================================ */
+
+/* --- ANGKA STOK NYA DENYUT --- */
+.dash .stok-angka{font-weight:800; font-size:16px; display:inline-block}
+.dash .stok-kritis .stok-angka{color:#d97706 !important; animation:denyutStok 1.4s ease-in-out infinite}
+.dash .stok-habis .stok-angka{color:#dc2626 !important; animation:goyangStok .6s ease-in-out infinite}
+@keyframes denyutStok{0%,100%{transform:scale(1)}50%{transform:scale(1.22) rotate(2deg)}}
+@keyframes goyangStok{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px) rotate(-2deg)}75%{transform:translateX(3px) rotate(2deg)}}
+
+/* --- LABEL MENIPIS / HABIS KEDIP + GLOW --- */
+.dash .label-menipis{display:inline-block; font-size:11px; font-weight:800; color:#92400e; background:#fef3c7; border:1px solid #fde68a; border-radius:20px; padding:4px 10px; margin-top:4px; animation:kedipMenipis 1.2s ease-in-out infinite}
+.dash .label-habis{display:inline-block; font-size:11px; font-weight:800; color:white; background:#dc2626; border-radius:20px; padding:4px 10px; margin-top:4px; animation:glowHabis 1s ease-in-out infinite}
+@keyframes kedipMenipis{0%,100%{opacity:1; box-shadow:0 0 0 0 rgba(245,158,11,0)}50%{opacity:.7; box-shadow:0 0 0 6px rgba(245,158,11,0.25)}}
+@keyframes glowHabis{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}50%{box-shadow:0 0 0 8px rgba(220,38,38,0)}}
+
+/* --- BARIS NYA IKUT BERDENYUT - PALING KENTARA --- */
+.dash .table-bar tbody tr.row-kritis{animation:rowKritis 2s ease-in-out infinite !important; background:#fffbeb !important}
+.dash .table-bar tbody tr.row-habis{animation:rowHabis 1.2s ease-in-out infinite !important; background:#fef2f2 !important}
+@keyframes rowKritis{0%,100%{background:#fffbeb}50%{background:#fef3c7; box-shadow:inset 0 0 0 2px #f59e0b}}
+@keyframes rowHabis{0%,100%{background:#fef2f2}50%{background:#fee2e2; box-shadow:inset 0 0 0 2px #dc2626}}
+
+/* --- FOTO OBAT NYA JUGA IKUT GOYANG KALAU KRITIS --- */
+.dash .row-kritis .foto-bar{animation:goyangStok 2s ease-in-out infinite; border-color:#f59e0b !important}
+.dash .row-habis .foto-bar{animation:goyangStok .8s ease-in-out infinite; border-color:#dc2626 !important}
+
+/* --- BADGE KADALUARSA TETAP GOYANG --- */
+.dash .badge-exp{animation:shakeBar .5s infinite !important}

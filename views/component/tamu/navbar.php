@@ -1,29 +1,4 @@
 <?php $hal = $_GET['halaman'] ?? 'home'; ?>
-<style>
-:root{ --teal:#0f766e; --teal2:#14b8a6; --mint:#ccfbf1; --dark:#064e3b; }
-/* TOPBAR ANIMASI */
-.topbar-uks{background:linear-gradient(90deg,var(--dark),var(--teal),var(--teal2)); background-size:200% 100%; color:white; padding:10px 0; position:relative; overflow:hidden; animation:gradMove 8s ease infinite}
-@keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.topbar-uks::before{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); animation:shine 4s infinite}
-@keyframes shine{0%{left:-100%}100%{left:100%}}
-.topbar-text{font-size:14px; font-weight:800; letter-spacing:0.8px; text-transform:uppercase; animation:slideLeft 20s linear infinite; white-space:nowrap}
-@keyframes slideLeft{0%{transform:translateX(0)}100%{transform:translateX(-10px)}}
-
-/* NAVBAR ANIMASI */
-.navbar-uks{ min-height:72px; background:rgba(255,255,255,0.95) !important; backdrop-filter:blur(12px); border-bottom:1px solid #e0f2f1; transition:all .4s; position:sticky; top:0; z-index:1030}
-.navbar-uks.scrolled{box-shadow:0 10px 40px rgba(15,118,110,0.1); min-height:64px}
-.navbar-uks .navbar-brand{font-weight:800; letter-spacing:-0.5px; transition:.3s}
-.navbar-uks .navbar-brand:hover{transform:scale(1.05)}
-.navbar-uks .navbar-brand img{transition:transform .6s}
-.navbar-uks .navbar-brand:hover img{transform:rotate(15deg) scale(1.1)}
-.navbar-uks .nav-link{position:relative; font-weight:600; font-size:14px; color:#475569 !important; padding:8px 14px !important; margin:0 2px; border-radius:30px; transition:all .3s}
-.navbar-uks .nav-link::after{content:''; position:absolute; bottom:2px; left:50%; width:0; height:2.5px; background:linear-gradient(90deg,var(--teal),var(--teal2)); border-radius:2px; transition:all .3s; transform:translateX(-50%)}
-.navbar-uks .nav-link:hover::after, .navbar-uks .nav-link.active::after{width:60%}
-.navbar-uks .nav-link:hover{color:var(--teal) !important; background:var(--mint2)}
-.navbar-uks .nav-link.active{background:var(--mint); color:var(--teal) !important; font-weight:800}
-.pulse-btn{position:relative; overflow:hidden; animation:pulseBtn 2.5s infinite}
-@keyframes pulseBtn{0%{box-shadow:0 0 0 0 rgba(220,38,38,0.4)}70%{box-shadow:0 0 0 12px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
-</style>
 
 <!-- TOPBAR - VERSI BESAR + ANIMASI SHINE -->
 <div class="topbar-uks">

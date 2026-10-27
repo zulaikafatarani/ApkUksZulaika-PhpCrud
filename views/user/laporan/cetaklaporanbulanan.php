@@ -40,5 +40,8 @@ if($total==0) echo '<tr><td colspan="9" class="text-center py-3">Tidak ada data 
 </tbody></table>
 
 <div class="row mt-4"><div class="col-8"></div><div class="col-4 text-center">Karang Baru, <?= date('d F Y') ?><br>Pembina UKS / Petugas<br><br><br><br><b><u><?= $_SESSION['namauser']??'Buk Ely' ?></u></b></div></div>
-<div class="no-print text-center mt-3"><button onclick="window.print()" class="btn btn-success btn-sm">Cetak PDF Bulanan</button> <a href="index.php?halaman=laporanbulanan&bulan=<?= $bulan ?>&tahun=<?= $tahun ?>" class="btn btn-secondary btn-sm">Kembali</a></div>
+<div class="no-print text-center mt-3">
+<button onclick="window.print()" class="btn btn-success btn-sm btn-cetak-fix">Cetak / Simpan PDF</button>
+<a href="index.php?halaman=laporanbulanan&bulan=<?= $bulan ?>&tahun=<?= $tahun ?>" class="btn btn-secondary btn-sm">Kembali</a></div>
+
 </div></body></html>

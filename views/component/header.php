@@ -7,4 +7,5 @@
     <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="assets/css/adminlte.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/uks.css?v=<?= time() ?>">
 </head>

@@ -1,27 +1,6 @@
 <section class="py-5 position-relative" style="background:#f8fafc; overflow:hidden">
-<style>
-:root{ --teal:#0f766e; --teal2:#14b8a6; --mint:#ccfbf1; --mint2:#f0fdfa; --dark:#064e3b; --radius:20px; }
-.uk-card{border-radius:var(--radius); border:1px solid #e0f2f1; background:white; box-shadow:0 10px 35px rgba(15,118,110,0.07); transition:all .5s cubic-bezier(0.4,0,0.2,1); position:relative; overflow:hidden; z-index:5}
-.uk-card::after{content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(204,251,241,0.5), transparent); transition:0s; pointer-events:none}
-.uk-card:hover::after{left:100%; transition:0.9s}
-.uk-card:hover{transform:translateY(-8px) scale(1.02); box-shadow:0 24px 65px rgba(15,118,110,0.15); border-color:var(--teal2)}
-.icon-box{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--teal),var(--teal2));color:white; transition:all .5s; flex-shrink:0}
-.uk-card:hover .icon-box{transform:rotateY(180deg) scale(1.12)}
-.icon-box.mint{background:var(--mint);color:var(--teal); border:1px solid #99f6e0}
-.section-title{font-weight:800;color:var(--dark); letter-spacing:-0.5px}
-.float-orb{position:absolute; border-radius:50%; pointer-events:none !important; z-index:1}
-.orb1{width:280px;height:280px;background:radial-gradient(circle, rgba(20,184,166,0.18), transparent 70%); animation:floatOrb 7s ease-in-out infinite}
-.orb2{width:360px;height:360px;background:radial-gradient(circle, rgba(204,251,241,0.55), transparent 70%); animation:floatOrb 9s ease-in-out infinite reverse}
-@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-32px) scale(1.08)}}
-.reveal{opacity:0; transform:translateY(32px); transition:all .9s cubic-bezier(0.4,0,0.2,1)}
-.reveal.active{opacity:1; transform:translateY(0)}
-.shimmer{position:relative; overflow:hidden}
-.shimmer::before{content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent); animation:shimmer 3s infinite; pointer-events:none}
-@keyframes shimmer{0%{left:-100%}100%{left:200%}}
-.badge-mint{background:var(--mint);color:var(--teal);border-radius:30px;padding:9px 18px;font-weight:800;animation:pulseBadge 2s infinite}
-@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes popUp{from{opacity:0; transform:translateY(30px) scale(0.95)}to{opacity:1; transform:translateY(0) scale(1)}}
-</style>
+<!-- STYLE SUDAH PINDAH KE assets/css/uks.css - HAPUS <style> LAMA -->
+<!-- Yang disisain cuma yang khusus tentang: TIDAK ADA, semua udah di uks.css -->
 
 <!-- ORNAMEN -->
 <div class="float-orb orb1" style="top:2%; left:-80px"></div>
@@ -29,8 +8,7 @@
 <div style="position:absolute; inset:0; background-image:radial-gradient(#ccfbf1 1.3px, transparent 1.3px); background-size:22px 22px; opacity:0.32; pointer-events:none"></div>
 
 <div class="container position-relative" style="z-index:5">
-    
-    <!-- HEADER SELARAS HOME image_15c707.png -->
+    <!-- HEADER SELARAS HOME -->
     <div class="text-center mb-5 reveal">
         <span class="badge-mint mb-3"><i class="fas fa-heartbeat mr-2"></i> PROFIL UKS DIGITAL</span>
         <h1 class="section-title" style="font-size:44px"><i class="fas fa-heartbeat mr-2" style="color:var(--teal)"></i>Tentang UKS Digital</h1>
@@ -42,7 +20,6 @@
           <span class="badge px-3 py-2" style="background:white;border:1px solid #ccfbf1;color:var(--teal);border-radius:20px"><i class="fas fa-shield-alt mr-1"></i> Role Admin Petugas Anggota</span>
         </div>
     </div>
-
     <!-- TRANSFORMASI + 4 FITUR - SELARAS STATISTIK HOME image_95ca22.png -->
     <div class="row align-items-stretch mb-5">
         <div class="col-lg-6 mb-4 reveal">
@@ -137,6 +114,7 @@
 
 </div>
 </section>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){

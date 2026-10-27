@@ -1,0 +1,64 @@
+aplikasisuksdigital/
+│
+├── index.php                 # homepage (views/landing/home.php + navbar_tamu)
+│
+├── assets/
+│   ├── js/ | css/ | plugins/
+│   └── images/ slider/ barang/ siswa/ guru/ user/
+│  
+├── views/
+│   ├── component/ 
+│   │   ├── tamu/             # Pengunjung umum
+│   │   │   ├── navbar.php    => Ada tombol [Login Pengurus] & [Login Pasien]
+│   │   │   └── footer.php
+│   │   ├── user/             # Setelah login pengurus
+│   │   │   ├── navbar.php
+│   │   │   ├── sidebaradmin.php    => 100% menu
+│   │   │   ├── sidebarpetugas.php  => user disembunyikan
+│   │   │   ├── sidebaranggota.php  => user, kategori, laporan disembunyikan
+│   │   ├── header.php
+│   │   └── footerjs.php
+│   │
+│   ├── user/   ← (ADMIN & PETUGAS & ANGGOTA)
+│   │   ├── dashboard/ dashboardadmin.php, dashboardpetugas.php, dashboardanggota.php
+│   │   ├── user/ index, create, edit, show
+│   │   ├── siswa/ index, create, edit, show
+│   │   ├── guru/ index, create, edit, show
+│   │   ├── kategori/ index, create, edit, show
+│   │   ├── barang/ index, create, edit, show
+│   │   ├── penanganan/ index, create, edit, show
+│   │   └── laporan/ laporanharian, cetaklaporanharian, laporanbulanan,
+│   │                cetaklaporanbulanan, laporantahunan, cetaklaporantahunan
+│   │
+│   ├── landing/   ← (PUBLIC / TANPA LOGIN)
+│   │   ├── home.php          (Beranda + grafik tren keluhan + fasilitas UKS)
+│   │   ├── daftarobat.php    (Katalog obat bebas & alkes - tanpa stok detail)
+│   │   ├── detailobat.php    (Khasiat & aturan pakai)
+│   │   ├── daftarkategori.php(Filter obat per kategori)
+│   │   ├── tentang.php       (Profil UKS + struktur PMR)
+│   │   ├── kontak.php        (No darurat, lokasi, jadwal piket)
+│   │   └── daftarisi.php     (Sitemap)
+│   │
+│   ├── pasien/   ← (BARU - GANTI cekriwayat.php)
+│   │   ├── loginpasien.php   (Login NIS + Password - HANYA pasien terdaftar)
+│   │   ├── riwayatpasien.php (Lihat riwayat medis SENDIRI setelah login,
+│   │   │                     query WHERE nis = $_SESSION['pasien']['nis'])
+│   │   └── dashboardpasien.php (Ringkasan kunjungan, obat terakhir, status)
+│   │
+│   ├── auth/   
+│   │   ├── loginuser.php     (Login pengurus: admin/petugas/anggota)
+│   │   ├── logout.php
+│   │
+│   └── errors/ 404.php, 403.php, 500.php
+│
+└── proses/
+    ├── koneksi.php
+    ├── session.php
+    ├── prosesuser.php
+    ├── prosesloginuser.php
+    ├── proseslogout.php
+    ├── prosespasien.php      => loginpasien, logoutpasien, ubahpasswordpasien
+    ├── proseskategori.php
+    ├── prosesbarang.php
+    ├── prosespenanganan.php
+    └── proseslaporan.php

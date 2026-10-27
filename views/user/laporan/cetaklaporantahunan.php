@@ -45,5 +45,7 @@ if(mysqli_num_rows($rekap)==0) echo '<tr><td colspan="5" class="text-center">Bel
 <tbody><?php $no=1; while($d=mysqli_fetch_assoc($detail)): ?><tr><td><?= $no++ ?></td><td><?= date('d/m/Y',strtotime($d['tanggalpenanganan'])) ?></td><td><?= htmlspecialchars($d['namasiswa']?:$d['namaguru']) ?></td><td><?= htmlspecialchars($d['keluhan']) ?></td><td><?= htmlspecialchars($d['tindakan']) ?></td><td><?= strtoupper($d['statuspasien']) ?></td></tr><?php endwhile; ?></tbody></table>
 
 <div class="row mt-4"><div class="col-6 text-center">Mengetahui,<br>Kepala SMKN 1 Karang Baru<br><br><br><br><b>(___________________)</b></div><div class="col-6 text-center">Karang Baru, <?= date('d F Y') ?><br>Pembina UKS<br><br><br><br><b><u><?= $_SESSION['namauser']??'Buk Ely' ?></u></b></div></div>
-<div class="no-print text-center mt-3"><button onclick="window.print()" class="btn btn-success btn-sm">Cetak Tahunan</button> <a href="index.php?halaman=laporantahunan&tahun=<?= $tahun ?>" class="btn btn-secondary btn-sm">Kembali</a></div>
+<div class="no-print text-center mt-3">
+<button onclick="window.print()" class="btn btn-success btn-sm btn-cetak-fix">Cetak / Simpan PDF</button>
+    <a href="index.php?halaman=laporantahunan&tahun=<?= $tahun ?>" class="btn btn-secondary btn-sm">Kembali</a></div>
 </div><script>window.onload=function(){ window.print(); }</script></body></html>

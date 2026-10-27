@@ -1,51 +1,11 @@
 <?php
-// views/user/user/show.php - DETAIL PENGURUS V2
 batasi_akses_role(['admin']);
-if (!isset($koneksi)) include __DIR__.'/../../../proses/koneksi.php';
-
-$id = (int)($_GET['id'] ?? 0);
-$data = mysqli_query($koneksi, "SELECT * FROM user WHERE iduser=$id");
-$u = mysqli_fetch_assoc($data);
-
-if(!$u){
-  echo '<div class="content"><div class="container-fluid"><div class="alert alert-danger">User ID '.$id.' tidak ada di database!</div><a href="index.php?halaman=user" class="btn btn-secondary">Kembali</a></div></div>';
-  return;
-}
-$foto = 'assets/images/user/'.($u['foto'] ?: 'default.png');
-if(!file_exists($foto)) $foto='assets/images/user/default.png';
-$role = strtolower($u['role']);
+if(!isset($koneksi)) include __DIR__.'/../../../proses/koneksi.php';
+$id=(int)($_GET['id']??0); $data=mysqli_query($koneksi,"SELECT * FROM user WHERE iduser=$id"); $u=mysqli_fetch_assoc($data);
+if(!$u){ echo '<div class="dash"><div class="content"><div class="container-fluid"><div class="alert alert-danger">User ID '.$id.' tidak ada di database!</div><a href="index.php?halaman=user" class="btn-toska">Kembali</a></div></div></div>'; return; }
+$foto='assets/images/user/'.($u['foto']?:'default.png'); if(!file_exists($foto)) $foto='assets/images/user/default.png'; $role=strtolower($u['role']);
 ?>
-<div class="content-header"><div class="container-fluid"><h3 class="font-weight-bold text-success"><i class="fas fa-id-card"></i> Detail Pengurus</h3></div></div>
-<div class="content"><div class="container-fluid">
-<div class="row">
-  <div class="col-md-4">
-    <div class="card card-success card-outline text-center shadow">
-      <div class="card-body">
-        <img src="<?= $foto ?>" width="130" height="130" class="img-circle elevation-2 mb-3" style="object-fit:cover;border:3px solid #28a745" onerror="this.src='assets/images/user/default.png'">
-        <h4 class="font-weight-bold"><?= htmlspecialchars($u['namauser']) ?></h4>
-        <p class="text-muted">@<?= htmlspecialchars($u['username']) ?></p>
-        <span class="badge badge-<?= $role=='admin'?'danger':($role=='petugas'?'info':'warning') ?> px-3 py-2"><?= strtoupper($u['role']) ?></span>
-        <hr>
-        <a href="index.php?halaman=edituser&id=<?= $u['iduser'] ?>" class="btn btn-info btn-sm btn-block"><i class="fas fa-edit"></i> Edit Data</a>
-        <a href="index.php?halaman=user" class="btn btn-secondary btn-sm btn-block">Kembali</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card shadow">
-      <div class="card-header bg-success text-white"><i class="fas fa-info-circle"></i> Data Lengkap Yang Telah Diinput</div>
-      <div class="card-body p-0">
-        <table class="table table-bordered mb-0">
-          <tr><th width="30%">ID User</th><td><?= $u['iduser'] ?></td></tr>
-          <tr><th>Nama Lengkap</th><td><b><?= htmlspecialchars($u['namauser']) ?></b></td></tr>
-          <tr><th>Username</th><td>@<?= htmlspecialchars($u['username']) ?></td></tr>
-          <tr><th>Password</th><td><code>*** terenkripsi ***</code></td></tr>
-          <tr><th>Role / Hak Akses</th><td><?= strtoupper($u['role']) ?> - <?php if($role=='admin') echo 'Admin bisa kelola semua'; elseif($role=='petugas') echo 'Petugas bisa kelola master & medis'; else echo 'Anggota hanya lihat & tangani pasien'; ?></td></tr>
-          <tr><th>Foto File</th><td><?= htmlspecialchars($u['foto'] ?: 'default.png') ?></td></tr>
-          <tr><th>Status</th><td><span class="badge badge-success">AKTIF</span> - Akun bisa dipakai login di halaman loginuser</td></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-</div></div>
+<div class="dash">
+<div class="content-header"><div class="container-fluid"><div class="row mb-2 align-items-center"><div class="col-sm-7 reveal"><h1 class="m-0 font-weight-bold" style="color:var(--dark)"><i class="fas fa-id-card mr-2" style="color:var(--teal)"></i>Detail Pengurus</h1><small class="text-muted">UKS Digital - <span class="badge-mint"><?= strtoupper($u['role'])?></span> | <?= htmlspecialchars($u['namauser'])?></small></div><div class="col-sm-5 text-right reveal" style="transition-delay:.1s"><a href="index.php?halaman=user" class="btn btn-pill" style="background:white;border:1px solid #ccfbf1;color:var(--teal)"><i class="fas fa-arrow-left mr-1"></i> Kembali</a></div></div></div></div>
+<div class="content"><div class="container-fluid position-relative"><div class="float-orb" style="width:180px;height:180px;top:-10px;right:-20px;opacity:0.6"></div><div class="row"><div class="col-md-4"><div class="uk-card p-4 text-center mb-4 reveal shimmer"><img src="<?= $foto ?>" class="foto-big mb-3" onerror="this.src='assets/images/user/default.png'"><h4 class="font-weight-bold mb-1" style="color:var(--dark)"><?= htmlspecialchars($u['namauser'])?></h4><p class="text-muted">@<?= htmlspecialchars($u['username'])?></p><span class="badge-role <?= $role=='admin'?'badge-admin':($role=='petugas'?'badge-petugas':'badge-anggota')?>"><?= strtoupper($u['role'])?></span><hr style="border-color:#e0f2f1"><a href="index.php?halaman=edituser&id=<?= $u['iduser']?>" class="btn-toska btn-block mb-2"><i class="fas fa-edit mr-1"></i> Edit Data</a><a href="index.php?halaman=user" class="btn btn-pill btn-block" style="background:#f0fdfa;border:1px solid #ccfbf1;color:var(--teal)">Kembali</a></div></div><div class="col-md-8"><div class="uk-card p-0 mb-4 reveal"><div class="p-3" style="background:linear-gradient(90deg,var(--teal),var(--teal2));color:white;border-radius:20px 20px 0 0"><h6 class="font-weight-bold mb-0"><i class="fas fa-info-circle mr-2"></i> Data Lengkap Yang Telah Diinput</h6></div><div class="table-responsive"><table class="table table-bordered mb-0 table-uks" style="font-size:13px"><tr><th width="30%">ID User</th><td><?= $u['iduser']?></td></tr><tr><th>Nama Lengkap</th><td><b><?= htmlspecialchars($u['namauser'])?></b></td></tr><tr><th>Username</th><td>@<?= htmlspecialchars($u['username'])?></td></tr><tr><th>Password</th><td><code>*** terenkripsi ***</code></td></tr><tr><th>Role / Hak Akses</th><td><?= strtoupper($u['role'])?> - <?php if($role=='admin') echo 'Admin bisa kelola semua'; elseif($role=='petugas') echo 'Petugas bisa kelola master & medis'; else echo 'Anggota hanya lihat & tangani pasien';?></td></tr><tr><th>Foto File</th><td><?= htmlspecialchars($u['foto']?:'default.png')?></td></tr><tr><th>Status</th><td><span class="badge-role badge-petugas">AKTIF</span> - Akun bisa dipakai login di loginuser</td></tr></table></div></div></div></div></div></div></div>
+<script>document.addEventListener("DOMContentLoaded",function(){const r=document.querySelectorAll('.dash .reveal');const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('active')}})},{threshold:0.12});r.forEach(x=>o.observe(x));});</script>
