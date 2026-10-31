@@ -1,6 +1,4 @@
 <?php $hal = $_GET['halaman'] ?? 'home'; ?>
-
-<!-- TOPBAR - VERSI BESAR + ANIMASI SHINE -->
 <div class="topbar-uks">
     <div class="container d-flex justify-content-between align-items-center position-relative" style="z-index:2">
         <div class="d-flex align-items-center">
@@ -16,8 +14,6 @@
         </div>
     </div>
 </div>
-
-<!-- NAVBAR PUTIH - TETAP VERSI KAMU + ANIMASI -->
 <nav class="navbar navbar-expand-lg navbar-uks navbar-white bg-white shadow-sm" id="navbarUKS">
     <div class="container">
         <a href="index.php?halaman=home" class="navbar-brand d-flex align-items-center">
@@ -31,24 +27,21 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a href="index.php?halaman=home" class="nav-link <?= $hal=='home'?'active':'' ?>"><i class="fas fa-home mr-1"></i> Home</a></li>
-                <li class="nav-item"><a href="index.php?halaman=cekriwayat" class="nav-link <?= $hal=='cekriwayat'?'active':'' ?>"><i class="fas fa-notes-medical mr-1"></i> Cek Riwayat</a></li>
                 <li class="nav-item"><a href="index.php?halaman=daftarobat" class="nav-link <?= $hal=='daftarobat'?'active':'' ?>"><i class="fas fa-pills mr-1"></i> Daftar Obat</a></li>
                 <li class="nav-item"><a href="index.php?halaman=daftarkategori" class="nav-link <?= $hal=='daftarkategori'?'active':'' ?>"><i class="fas fa-tags mr-1"></i> Kategori</a></li>
                 <li class="nav-item"><a href="index.php?halaman=tentang" class="nav-link <?= $hal=='tentang'?'active':'' ?>"><i class="fas fa-heartbeat mr-1"></i> Tentang</a></li>
                 <li class="nav-item"><a href="index.php?halaman=kontak" class="nav-link <?= $hal=='kontak'?'active':'' ?>"><i class="fas fa-phone-alt mr-1"></i> Kontak</a></li>
                 <li class="nav-item"><a href="index.php?halaman=daftarisi" class="nav-link <?= $hal=='daftarisi'?'active':'' ?>"><i class="fas fa-list mr-1"></i> Daftar Isi</a></li>
             </ul>
-            <a href="index.php?halaman=loginuser" class="btn rounded-pill px-4 font-weight-bold text-white pulse-btn" style="background:linear-gradient(90deg,#dc2626,#ef4444);box-shadow:0 6px 18px rgba(220,38,38,0.25)"><i class="fas fa-user-shield mr-1"></i> Login Petugas</a>
+            <div class="d-flex align-items-center">
+                <a href="index.php?halaman=loginpasien" class="btn rounded-pill px-4 font-weight-bold mr-2" style="background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white; box-shadow:0 6px 18px rgba(15,118,110,0.25)"><i class="fas fa-user-lock mr-1"></i> Login Pasien</a>
+                <a href="index.php?halaman=loginuser" class="btn rounded-pill px-4 font-weight-bold text-white pulse-btn" style="background:linear-gradient(90deg,#dc2626,#ef4444);box-shadow:0 6px 18px rgba(220,38,38,0.25)"><i class="fas fa-user-shield mr-1"></i> Login Petugas</a>
+            </div>
         </div>
     </div>
 </nav>
-
 <script>
-// Navbar scroll mengecil + shadow - biar kayak aplikasi premium
-window.addEventListener('scroll', function(){
-  var nav=document.getElementById('navbarUKS');
-  if(window.scrollY>60){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
-});
+window.addEventListener('scroll', function(){ var nav=document.getElementById('navbarUKS'); if(window.scrollY>60){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } });
 </script>
 <style>
 @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}

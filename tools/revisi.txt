@@ -1,0 +1,41 @@
+aplikasisuksdigital/
+│
+├── index.php
+├── assets/ js/ css/ plugins/ images/ slider/ barang/ siswa/ guru/ user/
+│
+├── views/
+│   ├── component/
+│   │   ├── tamu/ navbar.php, footer.php
+│   │   ├── user/ navbar.php, sidebaradmin.php, sidebarpetugas.php, sidebaranggota.php
+│   │   ├── pasien/ navbar.php, sidebarpasien.php, footer.php
+│   │   ├── header.php, footerjs.php
+│   │
+│   ├── user/   ← (ADMIN, PETUGAS, ANGGOTA)
+│   │   ├── dashboard/ dashboardadmin, dashboardpetugas, dashboardanggota
+│   │   ├── user/ index, create, edit, show
+│   │   ├── siswa/ index, create, edit, show, cetakkartu.php
+│   │   ├── guru/ index, create, edit, show, cetakkartu.php
+│   │   ├── kategori/ index, create, edit, show
+│   │   ├── barang/ index, create, edit, show
+│   │   ├── penanganan/ index, create.php (+ scan QR), edit, show, cetaksurat.php
+│   │   └── laporan/ laporanharian, cetaklaporanharian, laporanbulanan
+│   │                ( + filter tren keluhan ), cetaklaporanbulanan,
+│   │                laporantahunan, cetaklaporantahunan
+│   │
+│   ├── pasien/   ← (BARU)
+│   │   ├── loginpasien.php
+│   │   ├── dashboardpasien.php
+│   │   ├── riwayatpasien.php
+│   │   ├── ubahpassword.php
+│   │   └── cetakkartu.php      # Ada QR Code + foto + goldar
+│   │
+│   ├── landing/ home, daftarobat, detailobat, daftarkategori, tentang, kontak, daftarisi
+│   ├── auth/ loginuser.php, logout.php
+│   └── errors/ 404.php, 403.php, 500.php
+│
+└── proses/
+    ├── koneksi.php, session.php
+    ├── prosesuser.php, prosesloginuser.php, proseslogout.php
+    ├── prosespasien.php  # loginpasien, logoutpasien, ubahpassword, cari (buat scan), resetpassword
+    ├── proseskategori.php, prosesbarang.php, prosespenanganan.php
+    └── proseslaporan.php

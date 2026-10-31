@@ -63,11 +63,12 @@ $jk = strtolower($data['jeniskelamin'] ?? $data['jk'] ?? 'p');
                 </table>
               </div>
             </div>
-            <div class="p-3 text-right" style="border-top:1px solid #e0f2f1;background:#f0fdfa">
-              <a href="index.php?halaman=editsiswa&id=<?= $data['idsiswa'] ?>" class="btn-toska"><i class="fas fa-edit mr-1"></i> Edit Data</a>
-              <a href="index.php?halaman=siswa" class="btn-pill" style="background:#e2e8f0;color:#475569;padding:8px 20px">Kembali</a>
-            </div>
-          </div>
+<div class="p-3 text-right" style="border-top:1px solid #e0f2f1;background:#f0fdfa">
+  <a href="index.php?halaman=editsiswa&id=<?= $data['idsiswa'] ?>" class="btn-toska"><i class="fas fa-edit mr-1"></i> Edit Data</a>
+  <a href="index.php?halaman=cetakkartusiswa&id=<?= $data['idsiswa'] ?>" class="btn-toska" style="padding:8px 18px; font-size:13px"><i class="fas fa-id-card mr-1"></i> Cetak Kartu UKS</a>
+  <a href="index.php?halaman=siswa" class="btn-pill" style="background:#e2e8f0;color:#475569;padding:8px 20px">Kembali</a>
+</div>
+
         </div>
       </div>
     </div>

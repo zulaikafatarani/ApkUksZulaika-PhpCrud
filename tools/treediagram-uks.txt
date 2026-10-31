@@ -24,6 +24,11 @@ aplikasisuksdigital/
 │   │   |   ├── sidebaradmin.php       => Sidebar khusus Admin (Bisa klik & akses 100% menu sistem)
 │   │   |   ├── sidebarpetugas.php     => Sidebar Petugas (Menu kelola akun 'user' disembunyikan)
 │   │   |   ├── sidebaranggota.php     => Sidebar Anggota PMR (Menu kelola 'user', 'kategori', & 'laporan' disembunyikan)
+│   │   ├── pasien/
+|   |   |   ├── navbar.php             =>logo + nama + nis/nip + logout
+|   |   |   ├── navbar.php             =>hanya 3 menu: beranda, riwayat, ubah password
+|   |   |   ├── sidebarpasien.php
+|   |   |   ├── footer.php
 │   │   ├── header.php/
 │   │   ├── footerjs.php/  
 │   │       
@@ -74,6 +79,12 @@ aplikasisuksdigital/
 │   │       └── cetaklaporantahunan.php
 │   │
 │   |
+│   ├──pasien/                       ← (BARU - SEJAJAR DENGAN user/, BUKAN DI DALAMNYA)
+|   |    ├── loginpasien.php         # Login NIS/NIP + Password, pilih jenis siswa/guru
+|   |    ├── dashboardpasien.php     # Ringkasan kunjungan saya + tombol Cetak Kartu
+|   |    ├── riwayatpasien.php       # Hanya data saya (WHERE nis/nip = session)
+|   |    ├── ubahpassword.php        # Ganti password sendiri
+|   |    ├── cetakkartu.php          # Cetak kartu saya sendiri
 |   |
 │   ├── landing/   ← (PUBLIC / TANPA LOGIN)
 │   │   ├── home.php          (Halaman beranda utama yang menampilkan grafik tren penyakit sekolah terkini dan info fasilitas UKS)

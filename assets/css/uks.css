@@ -561,3 +561,156 @@ body.sidebar-collapse .main-footer-user, body.sidebar-closed .main-footer-user{m
 
 /* --- BADGE KADALUARSA TETAP GOYANG --- */
 .dash .badge-exp{animation:shakeBar .5s infinite !important}
+
+/* ============================================================
+   FITUR BARU PASIEN - GABUNG 1 UKS.CSS - SAMA KAYAK SISWA & BARANG
+   Paste di PALING BAWAH uks.css - Jangan bikin file baru!
+   ============================================================ */
+.dash .uk-card-bar{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; animation:popUpBar .7s cubic-bezier(0.4,0,0.2,1) both}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; border-radius:30px; font-weight:700; padding:10px 22px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.25); display:inline-flex; align-items:center; text-decoration:none !important; animation:pulseBar 2.5s infinite}
+@keyframes pulseBar{0%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0.35)}70%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0)}}
+.dash .btn-toska:hover{animation:none; transform:translateY(-3px) scale(1.03)}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:10px 14px}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12)}
+
+/* KARTU UKS - Ada animasi float & shimmer kayak home.php */
+.dash .kartu-uks{border-radius:20px; overflow:hidden; background:linear-gradient(135deg,var(--dark),var(--teal),var(--teal2)); color:white; box-shadow:0 12px 40px rgba(15,118,110,0.3); animation:popUpBar .7s both, floatBar 4s ease-in-out infinite; position:relative}
+.dash .kartu-uks::after{content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent); animation:shimmer 3s infinite}
+@keyframes shimmer{to{left:100%}}
+.dash .kartu-header{padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.2); font-weight:800; letter-spacing:1px}
+.dash .kartu-header span{float:right; font-size:11px; opacity:.8}
+.dash .kartu-body{display:flex; justify-content:space-between; align-items:center; padding:20px; gap:16px}
+.dash .kartu-body h4{margin:0; font-weight:800}
+.dash .qr-box{background:white; border-radius:12px; padding:8px; text-align:center; color:var(--dark); animation:denyutStok 2s ease-in-out infinite}
+.dash .qr-box img{width:90px; height:90px}
+.dash .qr-box small{font-size:10px; font-weight:800; display:block; margin-top:4px}
+@keyframes denyutStok{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes floatBar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* SCAN QR BOX */
+.dash .scan-box{border:2px dashed var(--teal2); border-radius:20px; overflow:hidden; margin-top:10px; animation:popUpBar .5s both}
+.dash .scan-box video{width:100% !important; border-radius:20px}
+
+/* STOK KRITIS - SUDAH PERNAH DIBAHAS - PASTIKAN ADA */
+.dash .stok-kritis .stok-angka{color:#d97706 !important; animation:denyutStok 1.4s infinite}
+.dash .row-kritis{animation:rowKritis 2s infinite !important; background:#fffbeb !important}
+@keyframes rowKritis{0%,100%{background:#fffbeb}50%{background:#fef3c7; box-shadow:inset 0 0 0 2px #f59e0b}}
+
+/* ============================================================
+   FITUR BARU PASIEN + SCAN QR - GABUNG 1 UKS.CSS
+   Paste di PALING BAWAH uks.css
+   ============================================================ */
+.dash .uk-card-pen{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; animation:popUpBar .7s both}
+.dash .header-pen{display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:#f0fdfa; border-bottom:1px solid #e0f2f1}
+.dash .scan-box{border:2px dashed var(--teal2); border-radius:20px; overflow:hidden; margin-top:10px; animation:popUpBar .5s both}
+.dash .scan-box video{width:100% !important}
+.dash .kartu-uks{border-radius:20px; overflow:hidden; background:linear-gradient(135deg,var(--dark),var(--teal),var(--teal2)); color:white; box-shadow:0 12px 40px rgba(15,118,110,0.3); animation:popUpBar .7s both, floatBar 4s ease-in-out infinite; position:relative}
+.dash .kartu-uks::after{content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent); animation:shimmer 3s infinite}
+@keyframes shimmer{to{left:100%}} @keyframes floatBar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.dash .kartu-header{padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.2); font-weight:800}
+.dash .kartu-header span{float:right; font-size:11px; opacity:.8}
+.dash .kartu-body{display:flex; justify-content:space-between; align-items:center; padding:20px; gap:16px}
+.dash .kartu-body h4{margin:0; font-weight:800}
+.dash .qr-box{background:white; border-radius:12px; padding:8px; text-align:center; color:var(--dark); animation:denyutStok 2s ease-in-out infinite}
+.dash .qr-box img{width:90px; height:90px}
+.dash .qr-box small{font-size:10px; font-weight:800; display:block; margin-top:4px}
+@keyframes denyutStok{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.dash .btn-toska{background:linear-gradient(90deg,var(--teal),var(--teal2)); color:white !important; border-radius:30px; font-weight:700; padding:10px 22px; border:none; box-shadow:0 6px 18px rgba(15,118,110,0.25); display:inline-flex; align-items:center; text-decoration:none !important; animation:pulseBar 2.5s infinite}
+@keyframes pulseBar{0%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0.35)}70%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 10px rgba(20,184,166,0)}100%{box-shadow:0 6px 18px rgba(15,118,110,0.2), 0 0 0 0 rgba(20,184,166,0)}}
+.dash .btn-toska:hover{animation:none; transform:translateY(-3px) scale(1.03)}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .form-control{border-radius:12px; border:1px solid #e0f2f1; padding:10px 14px}
+.dash .form-control:focus{border-color:var(--teal2); box-shadow:0 0 0 4px rgba(20,184,166,0.12)}
+
+/*
+cetak surat izin
+*/
+@media print {
+  .no-print, .main-header, .main-sidebar, .main-footer, .topbar-uks, .navbar-uks { display:none !important; }
+  .content-wrapper { margin:0 !important; padding:0 !important; }
+  .dash { padding:0 !important; }
+  body { background:white !important; }
+}
+.dash .uk-card-pen{border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; animation:popUpBar .7s both}
+.dash .badge-mint{background:var(--mint); color:var(--teal); border-radius:30px; padding:7px 14px; font-weight:700; font-size:12px; border:1px solid #99f6e0}
+.dash .qr-box{background:white; border-radius:12px; padding:8px; text-align:center; color:var(--dark); border:1px solid #ccfbf1}
+@keyframes popUpBar{from{opacity:0; transform:translateY(20px)}to{opacity:1; transform:translateY(0)}}
+
+
+/* assets/css/uks.css - UKS DIGITAL SMKN 1 KARANG BARU - 0103786196 XI RPL 2 */
+:root{
+  --teal:#0f766e; --teal2:#14b8a6; --dark:#064e3b; --mint:#ccfbf1; --mint2:#f0fdfa;
+  --mint-border:#99f6e0; --red:#dc2626; --blue:#0369a1;
+}
+.dash{ animation:popUpBar .6s both }
+.dash .uk-card-pen{ border-radius:20px; border:1px solid #e0f2f1; background:white; box-shadow:0 12px 40px rgba(15,118,110,0.08); overflow:hidden; position:relative; z-index:2; animation:popUpBar .7s both }
+.dash .header-pen{ display:flex; justify-content:space-between; align-items:center; padding:16px 18px; background:#f0fdfa; border-bottom:1px solid #e0f2f1 }
+.dash .table-pen{ width:100%; margin-bottom:0 }
+.dash .table-pen thead{ background:linear-gradient(90deg,#0f766e,#14b8a6); color:white }
+.dash .table-pen thead th{ border:none; padding:14px 12px; font-size:13px; font-weight:700 }
+.dash .table-pen tbody td{ vertical-align:middle; padding:12px; font-size:13px; border-top:1px solid #f0fdfa }
+.dash .table-pen tbody tr{ transition:all .3s }
+.dash .table-pen tbody tr:hover{ background:#f0fdfa!important }
+
+.dash .btn-toska{ background:linear-gradient(90deg,#0f766e,#14b8a6); color:white!important; border-radius:30px; font-weight:700; padding:8px 20px; border:none; display:inline-flex; align-items:center; gap:6px; text-decoration:none!important; box-shadow:0 6px 18px rgba(15,118,110,0.25); cursor:pointer; transition:all .3s }
+.dash .btn-toska:hover{ transform:translateY(-2px); box-shadow:0 10px 25px rgba(15,118,110,0.3); color:white!important }
+.dash .btn-outline-bar{ background:white; color:var(--teal)!important; border:1px solid #99f6e0; border-radius:30px; font-weight:700; padding:8px 20px; display:inline-flex; align-items:center; gap:6px; text-decoration:none!important; transition:all .3s }
+.dash .btn-outline-bar:hover{ background:var(--mint2); transform:translateY(-1px) }
+
+.dash .badge-mint{ background:var(--mint); color:var(--teal); border-radius:30px; padding:6px 14px; font-weight:700; font-size:11px; border:1px solid var(--mint-border); white-space:nowrap }
+.dash .badge-sembuh{ background:#dcfce7; color:#15803d; border:1px solid #bbf7d0; border-radius:20px; padding:5px 12px; font-weight:700; font-size:11px }
+.dash .badge-rujuk{ background:#fee2e2; color:#dc2626; border:1px solid #fecaca; border-radius:20px; padding:5px 12px; font-weight:700; font-size:11px }
+.dash .badge-istirahat{ background:#fef3c7; color:#b45309; border:1px solid #fde68a; border-radius:20px; padding:5px 12px; font-weight:700; font-size:11px }
+
+.dash .btn-aksi{ width:36px; height:36px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none!important; margin:0 2px; font-size:13px; transition:all .3s; border:none }
+.dash .btn-aksi:hover{ transform:translateY(-2px) scale(1.05) }
+.dash .btn-lihat{ background:linear-gradient(90deg,#0f766e,#14b8a6); color:white!important }
+.dash .btn-edit{ background:linear-gradient(90deg,#0369a1,#38bdf8); color:white!important }
+.dash .btn-hapus{ background:#fee2e2; color:#dc2626!important; border:1px solid #fecaca }
+
+.dash .scan-box{ border:2px dashed #99f6e0; border-radius:16px; padding:12px; background:#f0fdfa; overflow:hidden }
+.dash .scan-box video{ border-radius:12px!important; width:100%!important }
+.dash .foto-big-pen{ width:100px; height:100px; object-fit:cover; border-radius:50%; border:3px solid #5eead4 }
+.dash .qr-box{ background:white; border-radius:12px; padding:8px; text-align:center; border:1px solid #ccfbf1 }
+
+/* Animasi toska elegant */
+@keyframes popUpBar{ from{ opacity:0; transform:translateY(20px) } to{ opacity:1; transform:translateY(0) } }
+@keyframes floatSiswa{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-6px) } }
+@keyframes pulseToska{ 0%{ box-shadow:0 0 0 0 rgba(15,118,110,0.4) } 70%{ box-shadow:0 0 0 12px rgba(15,118,110,0) } 100%{ box-shadow:0 0 0 0 rgba(15,118,110,0) } }
+
+/* Print - logo & background tetap muncul */
+@media print{
+  .no-print, .main-header, .main-sidebar, .main-footer, .topbar-uks, .navbar-uks, .content-header{ display:none !important }
+  .content-wrapper{ margin:0 !important; padding:0 !important; background:white !important }
+  .dash{ padding:0 !important }
+  *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important }
+  body{ background:white !important }
+  @page{ size:A4; margin:15mm }
+}
+
+/* ========== RESPONSIVE FIX - HP & TABLET - 0103786196 ========== */
+@media (max-width: 991px){
+  .dash .header-pen{ flex-direction:column; gap:10px; align-items:flex-start }
+  .dash .table-pen{ font-size:12px }
+  .dash .table-pen thead th{ white-space:nowrap }
+  .dash .btn-aksi{ width:32px; height:32px; font-size:12px }
+  .content-header .text-right{ text-align:left!important; margin-top:10px }
+  .content-header h1{ font-size:20px!important }
+  .uk-card-pen .row .col-md-3{ border-right:none!important; border-bottom:1px solid #e0f2f1; padding-bottom:15px; margin-bottom:15px }
+}
+@media (max-width: 576px){
+  .dash .table-responsive{ border-radius:12px }
+  .dash .table-pen tbody td{ padding:8px 6px }
+  .dash .btn-toska, .dash .btn-outline-bar{ padding:6px 14px; font-size:12px }
+  .dash .header-pen .badge-mint{ font-size:10px; padding:5px 10px }
+  .content-wrapper{ padding:0 5px!important }
+  .surat-kotak{ padding:15px!important }
+  .kop{ flex-direction:column; text-align:center; gap:10px }
+  .kop div{ text-align:center!important }
+}
+/* Hamburger fix - biar bisa di klik */
+.main-header{ z-index:1030!important }
+.main-header .nav-link{ z-index:1031!important; position:relative }
+.dash .uk-card-pen{ z-index:1!important } /* tadinya 2, jadi ketutup hamburger */
+.navbar-uks{ position:relative; z-index:1020 }

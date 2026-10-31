@@ -62,3 +62,28 @@ aplikasisuksdigital/
     ├── prosesbarang.php
     ├── prosespenanganan.php
     └── proseslaporan.php
+
+
+
+    views/
+├── component/
+│   ├── tamu/              # Untuk PUBLIC
+│   │   ├── navbar.php
+│   │   └── footer.php
+│   ├── user/              # Untuk PENGURUS
+│   │   ├── navbar.php     # Ada foto, Buk Ely, role
+│   │   ├── sidebaradmin.php
+│   │   ├── sidebarpetugas.php
+│   │   └── sidebaranggota.php
+│   ├── pasien/            # BARU - Untuk PASIEN
+│   │   ├── navbar.php     # Simpel: Logo + Nama + NIS + Logout
+│   │   └── footer.php     # Footer mini
+│   ├── header.php
+│   └── footerjs.php
+│
+├── user/       # Halaman pengurus (admin/petugas/anggota)
+├── pasien/     # Halaman pasien (SEJAJAR dengan user, BUKAN di dalam user)
+│   ├── loginpasien.php
+│   ├── dashboardpasien.php
+│   └── riwayatpasien.php
+└── landing/    # Halaman tamu (tanpa login)

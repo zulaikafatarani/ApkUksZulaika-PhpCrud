@@ -21,6 +21,9 @@ if(empty($d['foto']) || !file_exists($fotoShow)) $fotoShow='assets/images/user/d
     <div class="col-md-9">
       <table class="table table-bordered mb-3"><tr><th style="width:30%; background:var(--mint2)">NIP</th><td><?= htmlspecialchars($d['nip']) ?></td></tr><tr><th style="background:var(--mint2)">Nama</th><td class="font-weight-bold" style="color:var(--dark)"><?= htmlspecialchars($d['namaguru']) ?></td></tr><tr><th style="background:var(--mint2)">Jenis Kelamin</th><td><?= $d['jeniskelamin']=='L'?'Laki-Laki':'Perempuan' ?> (<?= $d['jeniskelamin'] ?>)</td></tr><tr><th style="background:var(--mint2)">No HP</th><td><?= htmlspecialchars($d['nohp']) ?></td></tr><tr><th style="background:var(--mint2)">Alamat</th><td><?= htmlspecialchars($d['alamat']) ?></td></tr><tr><th style="background:var(--mint2)" class="text-danger">Riwayat Penyakit</th><td class="text-danger font-weight-bold"><?= htmlspecialchars($d['riwayatpenyakit']??'-') ?></td></tr></table>
       <a href="index.php?halaman=guru" class="btn btn-secondary btn-sm" style="border-radius:30px; padding:8px 20px">Kembali</a> <a href="index.php?halaman=editguru&id=<?= $d['idguru'] ?>" class="btn-toska">Edit</a>
+      <!-- Untuk guru ganti jadi: -->
+<a href="index.php?halaman=cetakkartuguru&id=<?= $d['idguru'] ?>" class="btn-toska" style="padding:8px 18px; font-size:13px"><i class="fas fa-id-card mr-1"></i> Cetak Kartu UKS</a>
+
     </div>
   </div></div></div></div></div>
 </div>
